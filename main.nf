@@ -1,207 +1,158 @@
 $HOSTNAME = ""
 params.outdir = 'results'  
 
-// Add for each process an option to change the parameters. Default is the set params
-//* autofill
-// part 1
-//* params.edit_First_Alignment_IgBlastn_params =  "no"  //* @dropdown @options:"yes","no"  @show_settings:"IgBlastn"
-//* params.edit_First_Alignment_MakeDb_params =  "no"  //* @dropdown @options:"yes","no" @show_settings:"MakeDb"
-//* params.edit_First_Alignment_Collapse_AIRRseq_params =  "no"  //* @dropdown @options:"yes","no" @show_settings:"Collapse_AIRRseq"
-// part 2
-//* params.edit_Undocumented_Alleles_params =  "no"  //* @dropdown @options:"yes","no" @show_settings:"Undocumented_Alleles"
-// part 3
-//* params.edit_Second_Alignment_IgBlastn_params =  "no"  //* @dropdown @options:"yes","no"  @show_settings:"IgBlastn"
-//* params.edit_Second_Alignment_MakeDb_params =  "no"  //* @dropdown @options:"yes","no" @show_settings:"MakeDb"
-//* params.edit_Second_Alignment_Collapse_AIRRseq_params =  "no"  //* @dropdown @options:"yes","no" @show_settings:"Collapse_AIRRseq"
-// part 4
-//* params.edit_Clone_AIRRseq_First_CreateGermlines_params =  "no"  //* @dropdown @options:"yes","no" @show_settings:"CreateGermlines"
-//* params.edit_Clone_AIRRseq_DefineClones_params =  "no"  //* @dropdown @options:"yes","no" @show_settings:"DefineClones"
-//* params.edit_Clone_AIRRseq_Second_CreateGermlines_params =  "no"  //* @dropdown @options:"yes","no" @show_settings:"CreateGermlines"
-// part 5
-//* params.edit_TIgGER_bayesian_genotype_Inference_d_call_params =  "no"  //* @dropdown @options:"yes","no" @show_settings:"TIgGER_bayesian_genotype_Inference"
-//* params.edit_TIgGER_bayesian_genotype_Inference_j_call_params =  "no"  //* @dropdown @options:"yes","no" @show_settings:"TIgGER_bayesian_genotype_Inference"
-//* params.edit_TIgGER_bayesian_genotype_Inference_v_call_params =  "no"  //* @dropdown @options:"yes","no" @show_settings:"TIgGER_bayesian_genotype_Inference"
-// part 6
-//* params.edit_Third_Alignment_IgBlastn_params =  "no"  //* @dropdown @options:"yes","no"  @show_settings:"IgBlastn"
-//* params.edit_Third_Alignment_MakeDb_params =  "no"  //* @dropdown @options:"yes","no" @show_settings:"MakeDb"
-//* params.edit_Third_Alignment_Collapse_AIRRseq_params =  "no"  //* @dropdown @options:"yes","no" @show_settings:"Collapse_AIRRseq"
-// part 7
-//params.edit_ogrdbstats_report_params = params.pipeline.//params.edit_ogrdbstats_report_params
 
-//* autofill
+// Process Parameters for First_Alignment_IgBlastn:
+params.First_Alignment_IgBlastn.num_threads = "44"
+params.First_Alignment_IgBlastn.ig_seqtype = "Ig"
+params.First_Alignment_IgBlastn.outfmt = "MakeDb"
+params.First_Alignment_IgBlastn.num_alignments_V = "10"
+params.First_Alignment_IgBlastn.domain_system = "imgt"
 
-// part 1
-if(params.edit_First_Alignment_IgBlastn_params){
-    // Process Parameters for First_Alignment_IgBlastn:
-    params.First_Alignment_IgBlastn.num_threads = "44"
-    params.First_Alignment_IgBlastn.ig_seqtype = "Ig"
-    params.First_Alignment_IgBlastn.outfmt = "MakeDb"
-    params.First_Alignment_IgBlastn.num_alignments_V = "10"
-    params.First_Alignment_IgBlastn.domain_system = "imgt"
-}
 
-if(params.edit_First_Alignment_MakeDb_params){
-    params.First_Alignment_MakeDb.failed = "true"
-    params.First_Alignment_MakeDb.format = "airr"
-    params.First_Alignment_MakeDb.regions = "default"
-    params.First_Alignment_MakeDb.extended = "true"
-    params.First_Alignment_MakeDb.asisid = "false"
-    params.First_Alignment_MakeDb.asiscalls = "false"
-    params.First_Alignment_MakeDb.inferjunction = "false"
-    params.First_Alignment_MakeDb.partial = "false"
-}
+params.First_Alignment_MakeDb.failed = "true"
+params.First_Alignment_MakeDb.format = "airr"
+params.First_Alignment_MakeDb.regions = "default"
+params.First_Alignment_MakeDb.extended = "true"
+params.First_Alignment_MakeDb.asisid = "false"
+params.First_Alignment_MakeDb.asiscalls = "false"
+params.First_Alignment_MakeDb.inferjunction = "false"
+params.First_Alignment_MakeDb.partial = "false"
 
-if(params.edit_First_Alignment_Collapse_AIRRseq_params){
-    // Process Parameters for First_Alignment_Collapse_AIRRseq:
-    params.First_Alignment_Collapse_AIRRseq.conscount_min = 0
-    params.First_Alignment_Collapse_AIRRseq.n_max = 10
-}
+// Process Parameters for First_Alignment_Collapse_AIRRseq:
+params.First_Alignment_Collapse_AIRRseq.conscount_min = 2
+params.First_Alignment_Collapse_AIRRseq.n_max = 10
+
 
 // part 2
-if(params.edit_Undocumented_Alleles_params){
-    // Process Parameters for Undocumented_Alleles:
-    params.Undocumented_Alleles.chain = "IGH"
-    params.Undocumented_Alleles.num_threads = 20
-    params.Undocumented_Alleles.germline_min = 200
-    params.Undocumented_Alleles.min_seqs = 50
-    params.Undocumented_Alleles.auto_mutrange = "true"
-    params.Undocumented_Alleles.mut_range = "1:10"
-    params.Undocumented_Alleles.pos_range = "1:318"
-    params.Undocumented_Alleles.y_intercept = 0.125
-    params.Undocumented_Alleles.alpha = 0.05
-    params.Undocumented_Alleles.j_max = 0.15
-    params.Undocumented_Alleles.min_frac = 0.75
-}
+
+// Process Parameters for Undocumented_Alleles:
+params.Undocumented_Alleles.chain = "IGH"
+params.Undocumented_Alleles.num_threads = 20
+params.Undocumented_Alleles.germline_min = 200
+params.Undocumented_Alleles.min_seqs = 50
+params.Undocumented_Alleles.auto_mutrange = "true"
+params.Undocumented_Alleles.mut_range = "1:10"
+params.Undocumented_Alleles.pos_range = "1:318"
+params.Undocumented_Alleles.y_intercept = 0.125
+params.Undocumented_Alleles.alpha = 0.05
+params.Undocumented_Alleles.j_max = 0.15
+params.Undocumented_Alleles.min_frac = 0.75
+
 
 // part 3
-if(params.edit_Second_Alignment_IgBlastn_params){
-    // Process Parameters for Second_Alignment_IgBlastn:
-    params.Second_Alignment_IgBlastn.num_threads = "44"
-    params.Second_Alignment_IgBlastn.ig_seqtype = "Ig"
-    params.Second_Alignment_IgBlastn.outfmt = "MakeDb"
-    params.Second_Alignment_IgBlastn.num_alignments_V = "10"
-    params.Second_Alignment_IgBlastn.domain_system = "imgt"
-}
 
-if(params.edit_Second_Alignment_MakeDb_params){
-    params.Second_Alignment_MakeDb.failed = "true"
-    params.Second_Alignment_MakeDb.format = "airr"
-    params.Second_Alignment_MakeDb.regions = "default"
-    params.Second_Alignment_MakeDb.extended = "true"
-    params.Second_Alignment_MakeDb.asisid = "false"
-    params.Second_Alignment_MakeDb.asiscalls = "false"
-    params.Second_Alignment_MakeDb.inferjunction = "false"
-    params.Second_Alignment_MakeDb.partial = "false"
-}
+// Process Parameters for Second_Alignment_IgBlastn:
+params.Second_Alignment_IgBlastn.num_threads = "44"
+params.Second_Alignment_IgBlastn.ig_seqtype = "Ig"
+params.Second_Alignment_IgBlastn.outfmt = "MakeDb"
+params.Second_Alignment_IgBlastn.num_alignments_V = "10"
+params.Second_Alignment_IgBlastn.domain_system = "imgt"
 
-if(params.edit_Second_Alignment_Collapse_AIRRseq_params){
-    // Process Parameters for Second_Alignment_Collapse_AIRRseq:
-    params.Second_Alignment_Collapse_AIRRseq.conscount_min = 2
-    params.Second_Alignment_Collapse_AIRRseq.n_max = 10
-}
+params.Second_Alignment_MakeDb.failed = "true"
+params.Second_Alignment_MakeDb.format = "airr"
+params.Second_Alignment_MakeDb.regions = "default"
+params.Second_Alignment_MakeDb.extended = "true"
+params.Second_Alignment_MakeDb.asisid = "false"
+params.Second_Alignment_MakeDb.asiscalls = "false"
+params.Second_Alignment_MakeDb.inferjunction = "false"
+params.Second_Alignment_MakeDb.partial = "false"
+
+// Process Parameters for Second_Alignment_Collapse_AIRRseq:
+params.Second_Alignment_Collapse_AIRRseq.conscount_min = 2
+params.Second_Alignment_Collapse_AIRRseq.n_max = 10
+
 
 // part 4
-if(params.edit_Clone_AIRRseq_First_CreateGermlines_params){
-    // Process Parameters for Clone_AIRRseq_First_CreateGermlines:
-    params.Clone_AIRRseq_First_CreateGermlines.failed = "false"
-    params.Clone_AIRRseq_First_CreateGermlines.format = "airr"
-    params.Clone_AIRRseq_First_CreateGermlines.g = "dmask"
-    params.Clone_AIRRseq_First_CreateGermlines.cloned = "false"
-    params.Clone_AIRRseq_First_CreateGermlines.seq_field = ""
-    params.Clone_AIRRseq_First_CreateGermlines.v_field = ""
-    params.Clone_AIRRseq_First_CreateGermlines.d_field = ""
-    params.Clone_AIRRseq_First_CreateGermlines.j_field = ""
-    params.Clone_AIRRseq_First_CreateGermlines.clone_field = ""
-}
 
-if(params.edit_Clone_AIRRseq_DefineClones_params){
-    params.Clone_AIRRseq_DefineClones.failed = "false"
-    params.Clone_AIRRseq_DefineClones.format = "airr"
-    params.Clone_AIRRseq_DefineClones.seq_field = ""
-    params.Clone_AIRRseq_DefineClones.v_field = ""
-    params.Clone_AIRRseq_DefineClones.d_field = ""
-    params.Clone_AIRRseq_DefineClones.j_field = ""
-    params.Clone_AIRRseq_DefineClones.group_fields =  ""
-    params.Clone_AIRRseq_DefineClones.mode = "gene"
-    params.Clone_AIRRseq_DefineClones.dist = "0.2"
-    params.Clone_AIRRseq_DefineClones.norm = "len"
-    params.Clone_AIRRseq_DefineClones.act = "set"
-    params.Clone_AIRRseq_DefineClones.model = "hh_s5f"
-    params.Clone_AIRRseq_DefineClones.sym = "min"
-    params.Clone_AIRRseq_DefineClones.link = "single"
-    params.Clone_AIRRseq_DefineClones.maxmiss = "0"
-}
+// Process Parameters for Clone_AIRRseq_First_CreateGermlines:
+params.Clone_AIRRseq_First_CreateGermlines.failed = "false"
+params.Clone_AIRRseq_First_CreateGermlines.format = "airr"
+params.Clone_AIRRseq_First_CreateGermlines.g = "dmask"
+params.Clone_AIRRseq_First_CreateGermlines.cloned = "false"
+params.Clone_AIRRseq_First_CreateGermlines.seq_field = ""
+params.Clone_AIRRseq_First_CreateGermlines.v_field = ""
+params.Clone_AIRRseq_First_CreateGermlines.d_field = ""
+params.Clone_AIRRseq_First_CreateGermlines.j_field = ""
+params.Clone_AIRRseq_First_CreateGermlines.clone_field = ""
 
-if(params.edit_Clone_AIRRseq_Second_CreateGermlines_params){
-    // Process Parameters for Clone_AIRRseq_Second_CreateGermlines:
-    params.Clone_AIRRseq_Second_CreateGermlines.failed = "false"
-    params.Clone_AIRRseq_Second_CreateGermlines.format = "airr"
-    params.Clone_AIRRseq_Second_CreateGermlines.g = "dmask"
-    params.Clone_AIRRseq_Second_CreateGermlines.cloned = "true"
-    params.Clone_AIRRseq_Second_CreateGermlines.seq_field = ""
-    params.Clone_AIRRseq_Second_CreateGermlines.v_field = ""
-    params.Clone_AIRRseq_Second_CreateGermlines.d_field = ""
-    params.Clone_AIRRseq_Second_CreateGermlines.j_field = ""
-    params.Clone_AIRRseq_Second_CreateGermlines.clone_field = ""
-}
+
+params.Clone_AIRRseq_DefineClones.failed = "false"
+params.Clone_AIRRseq_DefineClones.format = "airr"
+params.Clone_AIRRseq_DefineClones.seq_field = ""
+params.Clone_AIRRseq_DefineClones.v_field = ""
+params.Clone_AIRRseq_DefineClones.d_field = ""
+params.Clone_AIRRseq_DefineClones.j_field = ""
+params.Clone_AIRRseq_DefineClones.group_fields =  ""
+params.Clone_AIRRseq_DefineClones.mode = "gene"
+params.Clone_AIRRseq_DefineClones.dist = "0.2"
+params.Clone_AIRRseq_DefineClones.norm = "len"
+params.Clone_AIRRseq_DefineClones.act = "set"
+params.Clone_AIRRseq_DefineClones.model = "hh_s5f"
+params.Clone_AIRRseq_DefineClones.sym = "min"
+params.Clone_AIRRseq_DefineClones.link = "single"
+params.Clone_AIRRseq_DefineClones.maxmiss = "0"
+
+// Process Parameters for Clone_AIRRseq_Second_CreateGermlines:
+params.Clone_AIRRseq_Second_CreateGermlines.failed = "false"
+params.Clone_AIRRseq_Second_CreateGermlines.format = "airr"
+params.Clone_AIRRseq_Second_CreateGermlines.g = "dmask"
+params.Clone_AIRRseq_Second_CreateGermlines.cloned = "true"
+params.Clone_AIRRseq_Second_CreateGermlines.seq_field = ""
+params.Clone_AIRRseq_Second_CreateGermlines.v_field = ""
+params.Clone_AIRRseq_Second_CreateGermlines.d_field = ""
+params.Clone_AIRRseq_Second_CreateGermlines.j_field = ""
+params.Clone_AIRRseq_Second_CreateGermlines.clone_field = ""
+
 
 // part 5
-if(params.edit_TIgGER_bayesian_genotype_Inference_v_call_params){
-    // Process Parameters for TIgGER_bayesian_genotype_Inference:
-    params.TIgGER_bayesian_genotype_Inference_v_call.call = "v_call"
-    params.TIgGER_bayesian_genotype_Inference_v_call.seq = "sequence_alignment"
-    params.TIgGER_bayesian_genotype_Inference_v_call.find_unmutated = "false"
-    params.TIgGER_bayesian_genotype_Inference_v_call.single_assignments = "false"
-}
 
-if(params.edit_TIgGER_bayesian_genotype_Inference_d_call_params){
-    // Process Parameters for TIgGER_bayesian_genotype_Inference_d_call:
-    params.TIgGER_bayesian_genotype_Inference_d_call.call = "d_call"
-    params.TIgGER_bayesian_genotype_Inference_d_call.seq = "sequence_alignment"
-    params.TIgGER_bayesian_genotype_Inference_d_call.find_unmutated = "false"
-    params.TIgGER_bayesian_genotype_Inference_d_call.single_assignments = "true"
-}
+// Process Parameters for TIgGER_bayesian_genotype_Inference:
+params.TIgGER_bayesian_genotype_Inference_v_call.call = "v_call"
+params.TIgGER_bayesian_genotype_Inference_v_call.seq = "sequence_alignment"
+params.TIgGER_bayesian_genotype_Inference_v_call.find_unmutated = "false"
+params.TIgGER_bayesian_genotype_Inference_v_call.single_assignments = "false"
 
-if(params.edit_TIgGER_bayesian_genotype_Inference_j_call_params){
-    // Process Parameters for TIgGER_bayesian_genotype_Inference_j_call:
-    params.TIgGER_bayesian_genotype_Inference_j_call.call = "j_call"
-    params.TIgGER_bayesian_genotype_Inference_j_call.seq = "sequence_alignment"
-    params.TIgGER_bayesian_genotype_Inference_j_call.find_unmutated = "false"
-    params.TIgGER_bayesian_genotype_Inference_j_call.single_assignments = "true"
-}
+// Process Parameters for TIgGER_bayesian_genotype_Inference_d_call:
+params.TIgGER_bayesian_genotype_Inference_d_call.call = "d_call"
+params.TIgGER_bayesian_genotype_Inference_d_call.seq = "sequence_alignment"
+params.TIgGER_bayesian_genotype_Inference_d_call.find_unmutated = "false"
+params.TIgGER_bayesian_genotype_Inference_d_call.single_assignments = "true"
+
+// Process Parameters for TIgGER_bayesian_genotype_Inference_j_call:
+params.TIgGER_bayesian_genotype_Inference_j_call.call = "j_call"
+params.TIgGER_bayesian_genotype_Inference_j_call.seq = "sequence_alignment"
+params.TIgGER_bayesian_genotype_Inference_j_call.find_unmutated = "false"
+params.TIgGER_bayesian_genotype_Inference_j_call.single_assignments = "true"
+
 
 // part 6
-if(params.edit_Third_Alignment_IgBlastn_params){
-    // Process Parameters for Third_Alignment_IgBlastn:
-    params.Third_Alignment_IgBlastn.num_threads = "44"
-    params.Third_Alignment_IgBlastn.ig_seqtype = "Ig"
-    params.Third_Alignment_IgBlastn.outfmt = "MakeDb"
-    params.Third_Alignment_IgBlastn.num_alignments_V = "10"
-    params.Third_Alignment_IgBlastn.domain_system = "imgt"
-}
 
-if(params.edit_Third_Alignment_MakeDb_params){
-    params.Third_Alignment_MakeDb.failed = "true"
-    params.Third_Alignment_MakeDb.format = "airr"
-    params.Third_Alignment_MakeDb.regions = "default"
-    params.Third_Alignment_MakeDb.extended = "true"
-    params.Third_Alignment_MakeDb.asisid = "false"
-    params.Third_Alignment_MakeDb.asiscalls = "false"
-    params.Third_Alignment_MakeDb.inferjunction = "false"
-    params.Third_Alignment_MakeDb.partial = "false"
-}
+// Process Parameters for Third_Alignment_IgBlastn:
+params.Third_Alignment_IgBlastn.num_threads = "44"
+params.Third_Alignment_IgBlastn.ig_seqtype = "Ig"
+params.Third_Alignment_IgBlastn.outfmt = "MakeDb"
+params.Third_Alignment_IgBlastn.num_alignments_V = "10"
+params.Third_Alignment_IgBlastn.domain_system = "imgt"
 
-if(params.edit_Third_Alignment_Collapse_AIRRseq_params){
-    // Process Parameters for Third_Alignment_Collapse_AIRRseq:
-    params.Third_Alignment_Collapse_AIRRseq.conscount_min = 2
-    params.Third_Alignment_Collapse_AIRRseq.n_max = 10
-}
+params.Third_Alignment_MakeDb.failed = "true"
+params.Third_Alignment_MakeDb.format = "airr"
+params.Third_Alignment_MakeDb.regions = "default"
+params.Third_Alignment_MakeDb.extended = "true"
+params.Third_Alignment_MakeDb.asisid = "false"
+params.Third_Alignment_MakeDb.asiscalls = "false"
+params.Third_Alignment_MakeDb.inferjunction = "false"
+params.Third_Alignment_MakeDb.partial = "false"
+
+// Process Parameters for Third_Alignment_Collapse_AIRRseq:
+params.Third_Alignment_Collapse_AIRRseq.conscount_min = 2
+params.Third_Alignment_Collapse_AIRRseq.n_max = 10
+
 
 // part 7
-if(params.edit_ogrdbstats_report_params){
-    // Process Parameters for ogrdbstats_report:
-    params.ogrdbstats_report.chain = "IGHV"
-}
+
+// Process Parameters for ogrdbstats_report:
+params.ogrdbstats_report.chain = "IGHV"
 
 if (!params.v_germline_file){params.v_germline_file = ""} 
 if (!params.d_germline){params.d_germline = ""} 
@@ -415,8 +366,8 @@ input:
  set val(name),file(airrFile) from g0_12_outputFileTSV0_g0_19
 
 output:
- set val("passed"), file("${outfile}"+"passed.tsv") optional true  into g0_19_outputFileTSV0_g0_33, g0_19_outputFileTSV0_g0_30, g0_19_outputFileTSV0_g0_38, g0_19_outputFileTSV0_g0_27, g0_19_outputFileTSV0_g_8, g0_19_outputFileTSV0_g_46, g0_19_outputFileTSV0_g_15, g0_19_outputFileTSV0_g_52
- set val("failed"), file("${outfile}"+"failed*") optional true  into g0_19_outputFileTSV1_g0_33, g0_19_outputFileTSV1_g0_30, g0_19_outputFileTSV1_g0_38, g0_19_outputFileTSV1_g0_27
+ set val("passed"), file("${outfile}"+"passed.tsv") optional true  into g0_19_outputFileTSV0_g0_30, g0_19_outputFileTSV0_g0_38, g0_19_outputFileTSV0_g0_27, g0_19_outputFileTSV0_g0_41, g0_19_outputFileTSV0_g_8, g0_19_outputFileTSV0_g_46, g0_19_outputFileTSV0_g_15, g0_19_outputFileTSV0_g_52
+ set val("failed"), file("${outfile}"+"failed*") optional true  into g0_19_outputFileTSV1_g0_30, g0_19_outputFileTSV1_g0_38, g0_19_outputFileTSV1_g0_27, g0_19_outputFileTSV1_g0_41
 
 script:
 conscount_min = params.First_Alignment_Collapse_AIRRseq.conscount_min
@@ -1067,7 +1018,7 @@ close OUT;
 
 process First_Alignment_render_mutation_report {
 
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*.html$/) "first_alignment_mutation_report/$filename"}
+publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*.html$/) "first_alignment_alignment_reports/$filename"}
 input:
  file rmk from g0_38_rMarkdown0_g0_39
 
@@ -1224,7 +1175,6 @@ close OUT;
 
 process First_Alignment_render_alignment_report {
 
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*.html$/) "first_alignment_alignment_reports/$filename"}
 input:
  file rmk from g0_30_rMarkdown0_g0_37
 
@@ -1330,37 +1280,47 @@ for(groups in group_splits){
 }
 
 
-process First_Alignment_tables_postion {
+process First_Alignment_tables_postion_report {
 
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*tsv$/) "first_alignment_tables_position/$filename"}
 input:
- set val(name), file(collapse_pass) from g0_19_outputFileTSV0_g0_33
- set val(name1), file(collapse_fail) from g0_19_outputFileTSV1_g0_33
+ set val(name), file(collapse_pass) from g0_19_outputFileTSV0_g0_41
+ set val(name1), file(collapse_fail) from g0_19_outputFileTSV1_g0_41
 
 output:
- file "*tsv"  into g0_33_outFileTSV00
+ file "*.rmd"  into g0_41_rMarkdown0_g0_42
 
-script:
+shell:
 
 
 readArray_collapse_pass = collapse_pass.toString().split(' ')
 readArray_collapse_fail = collapse_fail.toString().split(' ')
-"""
-#!/usr/bin/env Rscript 
 
+
+'''
+#!/usr/bin/env perl
+
+
+my $script = <<'EOF';
+
+
+```{r echo=FALSE,message = FALSE}
 install.packages("vegan")
 library(seqinr)
 library(vegan)
 library(dplyr)
 library(ggplot2)
 library(alakazam)
+library(knitr)
 
-collapse_pass<-read.delim("${readArray_collapse_pass[0]}", sep="\t")
-collapse_fail<-read.delim("${readArray_collapse_fail[0]}", sep="\t")
+collapse_pass<-read.delim("/home/bcrlab/veredk/M24/RJs14_collapse_filter2/RJs14_fIgsSbRb9_db-pass_collapsed-passed.tsv", sep="\t")
+collapse_fail<-read.delim("/home/bcrlab/veredk/M24/RJs14_collapse_filter2/RJs14_fIgsSbRb9_db-pass_collapsed-failed_conscount.tsv", sep="\t")
 
 datadf <- rbind(collapse_pass, collapse_fail)
 datadf[,"v_gene"] <- getGene(datadf[,"v_call"])
 
+```
+
+```{r echo=FALSE,message = FALSE,fig.width=10,fig.height=8}
 positionInfo <- function(data, v_gene, verbose=TRUE){
     info <- list()
     if(verbose){cat(paste0("Analyzing positions for V gene: ",v_gene,"\n"))}
@@ -1385,8 +1345,6 @@ positionInfo <- function(data, v_gene, verbose=TRUE){
             uniq = paste(unique(ss), collapse = "|"),                                    # Unique bases in position
             repe = paste(tmp, collapse = "|")                                           # Repetitions of the unique bases in position
         )
-
-        print(unique(ss))
         if(verbose){
             if((i %% (round(nchar(as.character(data[1,"sequence_alignment"]))*0.1,0))) == 0){message("  ", round(i/nchar(as.character(data[1,"sequence_alignment"]))*100, 0), "%")}
         }
@@ -1407,6 +1365,10 @@ positionInfo <- function(data, v_gene, verbose=TRUE){
     return(df)
 }
 
+```
+
+
+```{r echo=FALSE,message = FALSE,results='asis',fig.width=10,fig.height=8}
 replace_dots <- function(x) {
   chartr(".", "-", x)
 }
@@ -1414,14 +1376,42 @@ df <- data.frame(lapply(datadf, replace_dots))
 
 filtered_data <- df %>% filter(!grepl(",", v_call))
 
+filtered_data <- filtered_data[1:1000,]
 info <- lapply(unique(filtered_data[,"v_call"]), function(g){
+ cat("\n\n", "*************************", "\n")
  x <- positionInfo( filtered_data[filtered_data[,"v_call"] == g,],g)
- write.table(x, paste0( chartr("*", "_", g) , "_positionInfo.tsv"), quote=FALSE, row.names=FALSE, sep="\t")
+ print(knitr::kable(x))
+ cat("\n\n", "*************************", "\n")
 })
 
+```
+
+EOF
+	
+open OUT, ">!{name}.rmd";
+print OUT $script;
+close OUT;
+
+'''
+
+}
+
+
+process First_Alignment_render_rmarkdown {
+
+input:
+ file rmk from g0_41_rMarkdown0_g0_42
+
+output:
+ file "*.html"  into g0_42_outputFileHTML00
 
 """
 
+#!/usr/bin/env Rscript 
+
+rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_dir=".")
+
+"""
 }
 
 
@@ -1618,8 +1608,8 @@ input:
  set val(name),file(airrFile) from g11_12_outputFileTSV0_g11_19
 
 output:
- set val("passed"), file("${outfile}"+"passed.tsv") optional true  into g11_19_outputFileTSV0_g11_33, g11_19_outputFileTSV0_g11_30, g11_19_outputFileTSV0_g11_38, g11_19_outputFileTSV0_g11_27, g11_19_outputFileTSV0_g_15
- set val("failed"), file("${outfile}"+"failed*") optional true  into g11_19_outputFileTSV1_g11_33, g11_19_outputFileTSV1_g11_30, g11_19_outputFileTSV1_g11_38, g11_19_outputFileTSV1_g11_27
+ set val("passed"), file("${outfile}"+"passed.tsv") optional true  into g11_19_outputFileTSV0_g11_30, g11_19_outputFileTSV0_g11_38, g11_19_outputFileTSV0_g11_27, g11_19_outputFileTSV0_g11_41, g11_19_outputFileTSV0_g_15
+ set val("failed"), file("${outfile}"+"failed*") optional true  into g11_19_outputFileTSV1_g11_30, g11_19_outputFileTSV1_g11_38, g11_19_outputFileTSV1_g11_27, g11_19_outputFileTSV1_g11_41
 
 script:
 conscount_min = params.Second_Alignment_Collapse_AIRRseq.conscount_min
@@ -2216,7 +2206,7 @@ x <- nrow(source_data)-nrow(data)
 lines <- c(
     paste("START>", "After picking clonal representatives"),
     paste("PASS>", nrow(data)),
-    paste("FAIL>", x),
+    paste("FAIL>", nrow(source_data)-nrow(data)),
     paste("END>", "After picking clonal representatives"),
     ""
   )
@@ -2880,36 +2870,47 @@ rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_di
 }
 
 
-process Second_Alignment_tables_postion {
+process Second_Alignment_tables_postion_report {
 
 input:
- set val(name), file(collapse_pass) from g11_19_outputFileTSV0_g11_33
- set val(name1), file(collapse_fail) from g11_19_outputFileTSV1_g11_33
+ set val(name), file(collapse_pass) from g11_19_outputFileTSV0_g11_41
+ set val(name1), file(collapse_fail) from g11_19_outputFileTSV1_g11_41
 
 output:
- file "*tsv"  into g11_33_outFileTSV00
+ file "*.rmd"  into g11_41_rMarkdown0_g11_42
 
-script:
+shell:
 
 
 readArray_collapse_pass = collapse_pass.toString().split(' ')
 readArray_collapse_fail = collapse_fail.toString().split(' ')
-"""
-#!/usr/bin/env Rscript 
 
+
+'''
+#!/usr/bin/env perl
+
+
+my $script = <<'EOF';
+
+
+```{r echo=FALSE,message = FALSE}
 install.packages("vegan")
 library(seqinr)
 library(vegan)
 library(dplyr)
 library(ggplot2)
 library(alakazam)
+library(knitr)
 
-collapse_pass<-read.delim("${readArray_collapse_pass[0]}", sep="\t")
-collapse_fail<-read.delim("${readArray_collapse_fail[0]}", sep="\t")
+collapse_pass<-read.delim("/home/bcrlab/veredk/M24/RJs14_collapse_filter2/RJs14_fIgsSbRb9_db-pass_collapsed-passed.tsv", sep="\t")
+collapse_fail<-read.delim("/home/bcrlab/veredk/M24/RJs14_collapse_filter2/RJs14_fIgsSbRb9_db-pass_collapsed-failed_conscount.tsv", sep="\t")
 
 datadf <- rbind(collapse_pass, collapse_fail)
 datadf[,"v_gene"] <- getGene(datadf[,"v_call"])
 
+```
+
+```{r echo=FALSE,message = FALSE,fig.width=10,fig.height=8}
 positionInfo <- function(data, v_gene, verbose=TRUE){
     info <- list()
     if(verbose){cat(paste0("Analyzing positions for V gene: ",v_gene,"\n"))}
@@ -2934,8 +2935,6 @@ positionInfo <- function(data, v_gene, verbose=TRUE){
             uniq = paste(unique(ss), collapse = "|"),                                    # Unique bases in position
             repe = paste(tmp, collapse = "|")                                           # Repetitions of the unique bases in position
         )
-
-        print(unique(ss))
         if(verbose){
             if((i %% (round(nchar(as.character(data[1,"sequence_alignment"]))*0.1,0))) == 0){message("  ", round(i/nchar(as.character(data[1,"sequence_alignment"]))*100, 0), "%")}
         }
@@ -2956,6 +2955,10 @@ positionInfo <- function(data, v_gene, verbose=TRUE){
     return(df)
 }
 
+```
+
+
+```{r echo=FALSE,message = FALSE,results='asis',fig.width=10,fig.height=8}
 replace_dots <- function(x) {
   chartr(".", "-", x)
 }
@@ -2963,14 +2966,42 @@ df <- data.frame(lapply(datadf, replace_dots))
 
 filtered_data <- df %>% filter(!grepl(",", v_call))
 
+filtered_data <- filtered_data[1:1000,]
 info <- lapply(unique(filtered_data[,"v_call"]), function(g){
+ cat("\n\n", "*************************", "\n")
  x <- positionInfo( filtered_data[filtered_data[,"v_call"] == g,],g)
- write.table(x, paste0( chartr("*", "_", g) , "_positionInfo.tsv"), quote=FALSE, row.names=FALSE, sep="\t")
+ print(knitr::kable(x))
+ cat("\n\n", "*************************", "\n")
 })
 
+```
+
+EOF
+	
+open OUT, ">!{name}.rmd";
+print OUT $script;
+close OUT;
+
+'''
+
+}
+
+
+process Second_Alignment_render_rmarkdown {
+
+input:
+ file rmk from g11_41_rMarkdown0_g11_42
+
+output:
+ file "*.html"  into g11_42_outputFileHTML00
 
 """
 
+#!/usr/bin/env Rscript 
+
+rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_dir=".")
+
+"""
 }
 
 
@@ -3165,8 +3196,8 @@ input:
  set val(name),file(airrFile) from g21_12_outputFileTSV0_g21_19
 
 output:
- set val("passed"), file("${outfile}"+"passed.tsv") optional true  into g21_19_outputFileTSV0_g21_33, g21_19_outputFileTSV0_g21_30, g21_19_outputFileTSV0_g21_38, g21_19_outputFileTSV0_g21_27, g21_19_outputFileTSV0_g_37
- set val("failed"), file("${outfile}"+"failed*") optional true  into g21_19_outputFileTSV1_g21_33, g21_19_outputFileTSV1_g21_30, g21_19_outputFileTSV1_g21_38, g21_19_outputFileTSV1_g21_27
+ set val("passed"), file("${outfile}"+"passed.tsv") optional true  into g21_19_outputFileTSV0_g21_30, g21_19_outputFileTSV0_g21_38, g21_19_outputFileTSV0_g21_27, g21_19_outputFileTSV0_g21_41, g21_19_outputFileTSV0_g_37
+ set val("failed"), file("${outfile}"+"failed*") optional true  into g21_19_outputFileTSV1_g21_30, g21_19_outputFileTSV1_g21_38, g21_19_outputFileTSV1_g21_27, g21_19_outputFileTSV1_g21_41
 
 script:
 conscount_min = params.Third_Alignment_Collapse_AIRRseq.conscount_min
@@ -3873,37 +3904,47 @@ rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_di
 }
 
 
-process Third_Alignment_tables_postion {
+process Third_Alignment_tables_postion_report {
 
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*tsv$/) "third_alignment_tables_position/$filename"}
 input:
- set val(name), file(collapse_pass) from g21_19_outputFileTSV0_g21_33
- set val(name1), file(collapse_fail) from g21_19_outputFileTSV1_g21_33
+ set val(name), file(collapse_pass) from g21_19_outputFileTSV0_g21_41
+ set val(name1), file(collapse_fail) from g21_19_outputFileTSV1_g21_41
 
 output:
- file "*tsv"  into g21_33_outFileTSV00
+ file "*.rmd"  into g21_41_rMarkdown0_g21_42
 
-script:
+shell:
 
 
 readArray_collapse_pass = collapse_pass.toString().split(' ')
 readArray_collapse_fail = collapse_fail.toString().split(' ')
-"""
-#!/usr/bin/env Rscript 
 
+
+'''
+#!/usr/bin/env perl
+
+
+my $script = <<'EOF';
+
+
+```{r echo=FALSE,message = FALSE}
 install.packages("vegan")
 library(seqinr)
 library(vegan)
 library(dplyr)
 library(ggplot2)
 library(alakazam)
+library(knitr)
 
-collapse_pass<-read.delim("${readArray_collapse_pass[0]}", sep="\t")
-collapse_fail<-read.delim("${readArray_collapse_fail[0]}", sep="\t")
+collapse_pass<-read.delim("/home/bcrlab/veredk/M24/RJs14_collapse_filter2/RJs14_fIgsSbRb9_db-pass_collapsed-passed.tsv", sep="\t")
+collapse_fail<-read.delim("/home/bcrlab/veredk/M24/RJs14_collapse_filter2/RJs14_fIgsSbRb9_db-pass_collapsed-failed_conscount.tsv", sep="\t")
 
 datadf <- rbind(collapse_pass, collapse_fail)
 datadf[,"v_gene"] <- getGene(datadf[,"v_call"])
 
+```
+
+```{r echo=FALSE,message = FALSE,fig.width=10,fig.height=8}
 positionInfo <- function(data, v_gene, verbose=TRUE){
     info <- list()
     if(verbose){cat(paste0("Analyzing positions for V gene: ",v_gene,"\n"))}
@@ -3928,8 +3969,6 @@ positionInfo <- function(data, v_gene, verbose=TRUE){
             uniq = paste(unique(ss), collapse = "|"),                                    # Unique bases in position
             repe = paste(tmp, collapse = "|")                                           # Repetitions of the unique bases in position
         )
-
-        print(unique(ss))
         if(verbose){
             if((i %% (round(nchar(as.character(data[1,"sequence_alignment"]))*0.1,0))) == 0){message("  ", round(i/nchar(as.character(data[1,"sequence_alignment"]))*100, 0), "%")}
         }
@@ -3950,6 +3989,10 @@ positionInfo <- function(data, v_gene, verbose=TRUE){
     return(df)
 }
 
+```
+
+
+```{r echo=FALSE,message = FALSE,results='asis',fig.width=10,fig.height=8}
 replace_dots <- function(x) {
   chartr(".", "-", x)
 }
@@ -3957,14 +4000,42 @@ df <- data.frame(lapply(datadf, replace_dots))
 
 filtered_data <- df %>% filter(!grepl(",", v_call))
 
+filtered_data <- filtered_data[1:1000,]
 info <- lapply(unique(filtered_data[,"v_call"]), function(g){
+ cat("\n\n", "*************************", "\n")
  x <- positionInfo( filtered_data[filtered_data[,"v_call"] == g,],g)
- write.table(x, paste0( chartr("*", "_", g) , "_positionInfo.tsv"), quote=FALSE, row.names=FALSE, sep="\t")
+ print(knitr::kable(x))
+ cat("\n\n", "*************************", "\n")
 })
 
+```
+
+EOF
+	
+open OUT, ">!{name}.rmd";
+print OUT $script;
+close OUT;
+
+'''
+
+}
+
+
+process Third_Alignment_render_rmarkdown {
+
+input:
+ file rmk from g21_41_rMarkdown0_g21_42
+
+output:
+ file "*.html"  into g21_42_outputFileHTML00
 
 """
 
+#!/usr/bin/env Rscript 
+
+rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_dir=".")
+
+"""
 }
 
 
