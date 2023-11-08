@@ -2,6 +2,7 @@ $HOSTNAME = ""
 params.outdir = 'results'  
 
 // Add for each process an option to change the parameters. Default is the set params
+//* autofill
 // part 1
 //* params.edit_First_Alignment_IgBlastn_params =  "no"  //* @dropdown @options:"yes","no"  @show_settings:"IgBlastn"
 //* params.edit_First_Alignment_MakeDb_params =  "no"  //* @dropdown @options:"yes","no" @show_settings:"MakeDb"
@@ -26,6 +27,8 @@ params.outdir = 'results'
 //* params.edit_Third_Alignment_Collapse_AIRRseq_params =  "no"  //* @dropdown @options:"yes","no" @show_settings:"Collapse_AIRRseq"
 // part 7
 //params.edit_ogrdbstats_report_params = params.pipeline.//params.edit_ogrdbstats_report_params
+
+//* autofill
 
 // part 1
 if(params.edit_First_Alignment_IgBlastn_params){
@@ -211,7 +214,7 @@ ch_empty_file_2 = file("$baseDir/.emptyfiles/NO_FILE_2", hidden:true)
 ch_empty_file_3 = file("$baseDir/.emptyfiles/NO_FILE_3", hidden:true)
 ch_empty_file_4 = file("$baseDir/.emptyfiles/NO_FILE_4", hidden:true)
 
-Channel.fromPath(params.v_germline_file, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_2_germlineFastaFile_g_8;g_2_germlineFastaFile_g_15;g_2_germlineFastaFile_g_37;g_2_germlineFastaFile_g_46;g_2_germlineFastaFile_g_52;g_2_germlineFastaFile_g0_22;g_2_germlineFastaFile_g0_12;g_2_germlineFastaFile_g0_30;g_2_germlineFastaFile_g11_22;g_2_germlineFastaFile_g11_12;g_2_germlineFastaFile_g11_30;g_2_germlineFastaFile_g21_22;g_2_germlineFastaFile_g21_12;g_2_germlineFastaFile_g21_30}
+Channel.fromPath(params.v_germline_file, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_2_germlineFastaFile_g_8;g_2_germlineFastaFile_g_15;g_2_germlineFastaFile_g_37;g_2_germlineFastaFile_g_46;g_2_germlineFastaFile_g_52;g_2_germlineFastaFile_g0_22;g_2_germlineFastaFile_g0_12;g_2_germlineFastaFile_g0_30;g_2_germlineFastaFile_g0_38;g_2_germlineFastaFile_g11_22;g_2_germlineFastaFile_g11_12;g_2_germlineFastaFile_g11_30;g_2_germlineFastaFile_g11_38;g_2_germlineFastaFile_g21_22;g_2_germlineFastaFile_g21_12;g_2_germlineFastaFile_g21_30;g_2_germlineFastaFile_g21_38}
 Channel.fromPath(params.d_germline, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_3_germlineFastaFile_g_30;g_3_germlineFastaFile_g0_16;g_3_germlineFastaFile_g0_12;g_3_germlineFastaFile_g11_16;g_3_germlineFastaFile_g11_12;g_3_germlineFastaFile_g14_0;g_3_germlineFastaFile_g14_1}
 Channel.fromPath(params.j_germline, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_4_germlineFastaFile_g_31;g_4_germlineFastaFile_g0_17;g_4_germlineFastaFile_g0_12;g_4_germlineFastaFile_g11_17;g_4_germlineFastaFile_g11_12;g_4_germlineFastaFile_g14_0;g_4_germlineFastaFile_g14_1}
 g_38_outputFileTxt_g0_9 = file(params.auxiliary_data, type: 'any')
@@ -351,9 +354,9 @@ input:
  set val(name3), file(j_germline_file) from g_4_germlineFastaFile_g0_12
 
 output:
- set val(name_igblast),file("*_db-pass.tsv") optional true  into g0_12_outputFileTSV0_g0_19, g0_12_outputFileTSV0_g0_27, g0_12_outputFileTSV0_g0_30
+ set val(name_igblast),file("*_db-pass.tsv") optional true  into g0_12_outputFileTSV0_g0_19, g0_12_outputFileTSV0_g0_30, g0_12_outputFileTSV0_g0_38, g0_12_outputFileTSV0_g0_27
  set val("reference_set"), file("${reference_set}") optional true  into g0_12_germlineFastaFile1_g_37, g0_12_germlineFastaFile1_g_46
- set val(name_igblast),file("*_db-fail.tsv")  into g0_12_outputFileTSV2_g0_27, g0_12_outputFileTSV2_g0_30
+ set val(name_igblast),file("*_db-fail.tsv")  into g0_12_outputFileTSV2_g0_30, g0_12_outputFileTSV2_g0_38, g0_12_outputFileTSV2_g0_27
 
 script:
 
@@ -412,8 +415,8 @@ input:
  set val(name),file(airrFile) from g0_12_outputFileTSV0_g0_19
 
 output:
- set val("passed"), file("${outfile}"+"passed.tsv") optional true  into g0_19_outputFileTSV0_g0_27, g0_19_outputFileTSV0_g0_30, g0_19_outputFileTSV0_g_8, g0_19_outputFileTSV0_g_46, g0_19_outputFileTSV0_g_15, g0_19_outputFileTSV0_g_52
- set val("failed"), file("${outfile}"+"failed*") optional true  into g0_19_outputFileTSV1_g0_27, g0_19_outputFileTSV1_g0_30
+ set val("passed"), file("${outfile}"+"passed.tsv") optional true  into g0_19_outputFileTSV0_g0_33, g0_19_outputFileTSV0_g0_30, g0_19_outputFileTSV0_g0_38, g0_19_outputFileTSV0_g0_27, g0_19_outputFileTSV0_g_8, g0_19_outputFileTSV0_g_46, g0_19_outputFileTSV0_g_15, g0_19_outputFileTSV0_g_52
+ set val("failed"), file("${outfile}"+"failed*") optional true  into g0_19_outputFileTSV1_g0_33, g0_19_outputFileTSV1_g0_30, g0_19_outputFileTSV1_g0_38, g0_19_outputFileTSV1_g0_27
 
 script:
 conscount_min = params.First_Alignment_Collapse_AIRRseq.conscount_min
@@ -870,19 +873,17 @@ if (class(novel) != 'try-error') {
 }
 
 
-process First_Alignment_alignment_report {
+process First_Alignment_count_aligmant_pass_fail {
 
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*pdf$/) "alignment_reports/$filename"}
+publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*txt$/) "First_Alignment_log/$filename"}
 input:
- set val(name), file(makeDb_pass) from g0_12_outputFileTSV0_g0_30
- set val(name1), file(makeDb_fail) from g0_12_outputFileTSV2_g0_30
- set val(name2), file(collapse_pass) from g0_19_outputFileTSV0_g0_30
- set val(name3), file(collapse_fail) from g0_19_outputFileTSV1_g0_30
- set val(name2), file(v_ref) from g_2_germlineFastaFile_g0_30
+ set val(name), file(makeDb_pass) from g0_12_outputFileTSV0_g0_27
+ set val(name1), file(makeDb_fail) from g0_12_outputFileTSV2_g0_27
+ set val(name2), file(collapse_pass) from g0_19_outputFileTSV0_g0_27
+ set val(name3), file(collapse_fail) from g0_19_outputFileTSV1_g0_27
 
 output:
- file "*csv"  into g0_30_outFileTSV00
- file "*pdf"  into g0_30_outputFilePdf11
+ set val(name), file("*txt")  into g0_27_logFile0_g_63
 
 script:
 
@@ -890,22 +891,77 @@ readArray_makeDb_pass = makeDb_pass.toString().split(' ')
 readArray_makeDb_fail = makeDb_fail.toString().split(' ')
 readArray_collapse_pass = collapse_pass.toString().split(' ')
 readArray_collapse_fail = collapse_fail.toString().split(' ')
-readArray_v_ref = v_ref.toString().split(' ')
+
 """
 #!/usr/bin/env Rscript 
+
+makeDb_pass<-read.csv("${readArray_makeDb_pass[0]}", sep="\t")
+makeDb_fail<-read.csv("${readArray_makeDb_fail[0]}", sep="\t")
+collapse_pass<-read.csv("${readArray_collapse_pass[0]}", sep="\t")
+collapse_fail<-read.csv("${readArray_collapse_fail[0]}", sep="\t")
+
+x<-"${readArray_makeDb_fail[0]}"
+
+lines <- c(
+    paste("START>", "After IgBLAST+makedb"),
+    paste("PASS>", nrow(makeDb_pass)),
+    paste("FAIL>", nrow(makeDb_fail)),
+    paste("END>", "After IgBLAST+makedb"),
+    "",
+    paste("START>", "after DUPCOUNT filter"),
+    paste("PASS>", nrow(collapse_pass)),
+    paste("FAIL>", nrow(collapse_fail)),
+    paste("END>", "after DUPCOUNT filter"),
+    ""
+  )
+
+
+file_path <- paste(chartr(".", "1", x),"output.txt", sep="-")
+
+cat(lines, sep = "\n", file = file_path, append = TRUE)
+"""
+
+}
+
+
+process First_Alignment_mutation_report {
+
+input:
+ set val(name), file(makeDb_pass) from g0_12_outputFileTSV0_g0_38
+ set val(name1), file(makeDb_fail) from g0_12_outputFileTSV2_g0_38
+ set val(name2), file(collapse_pass) from g0_19_outputFileTSV0_g0_38
+ set val(name3), file(collapse_fail) from g0_19_outputFileTSV1_g0_38
+ set val(name2), file(v_ref) from g_2_germlineFastaFile_g0_38
+
+output:
+ file "*.rmd"  into g0_38_rMarkdown0_g0_39
+
+shell:
+
+readArray_makeDb_pass = makeDb_pass.toString().split(' ')
+readArray_makeDb_fail = makeDb_fail.toString().split(' ')
+readArray_collapse_pass = collapse_pass.toString().split(' ')
+readArray_collapse_fail = collapse_fail.toString().split(' ')
+readArray_v_ref = v_ref.toString().split(' ')
+
+'''
+#!/usr/bin/env perl
+
+
+my $script = <<'EOF';
+
+
+```{r echo=FALSE,message = FALSE}
 library(ggplot2)
 library(rlang)
 library(alakazam)
 library(dplyr)
 library(Biostrings)
 
-makeDb_pass<-read.csv("${readArray_makeDb_pass[0]}", sep="\t")
-makeDb_fail<-read.csv("${readArray_makeDb_fail[0]}", sep="\t")
-collapse_pass<-read.csv("${readArray_collapse_pass[0]}", sep="\t")
-collapse_fail<-read.csv("${readArray_collapse_fail[0]}", sep="\t")
-v_ref<-readDNAStringSet("${readArray_v_ref[0]}")
+collapse_pass<-read.csv("/home/bcrlab/veredk/M24/RJs14_collapse_filter2/RJs14_fIgsSbRb9_db-pass_collapsed-passed.tsv", sep="\t")
+collapse_fail<-read.csv("/home/bcrlab/veredk/M24/RJs14_collapse_filter2/RJs14_fIgsSbRb9_db-pass_collapsed-failed_conscount.tsv", sep="\t")
+v_ref<-readDNAStringSet("/home/bcrlab/veredk/M24/IGH/V_gapped.fasta")
 v_ref<-as.character(v_ref)
-
 
 threshold_column <- if("consensus_count" %in% names(collapse_fail)) "consensus_count" else "duplicate_count"
 
@@ -914,81 +970,9 @@ threshold_collapse <- max(collapse_fail[[threshold_column]])
 
 collapse_db <- rbind(collapse_pass, collapse_fail)
 
+```
 
-
-
-# number of pass reads in each step
-
-my_vector<-c(nrow(makeDb_pass),nrow(makeDb_fail),nrow(collapse_pass),nrow(collapse_fail))
-my_matrix <- matrix(my_vector, nrow = 2, byrow = TRUE)
-my_dataframe <- data.frame(row.names = c("MakeDb", "collaps"), my_matrix)
-colnames(my_dataframe) <- c("PASS", "FAIL")
-print(my_dataframe)
-write.csv(my_dataframe, "my_data.csv")
-
-## plot duplicated column
-
-file <- "duplication_count_after_collapse.pdf"
-
-p1 <- ggplot(collapse_db, aes(!!sym(threshold_column))) +
-geom_histogram(bins = 100) +
-geom_vline(xintercept=threshold_collapse, linetype="dotted", col = "red")
-
-ggsave(file, p1, height = 10, width = 12)
-
-## number of multiple assignment per gene (IMGT / ASC)
-
-collapse_db[["v_gene"]] <- getGene(collapse_db[["v_call"]], first = F, collapse = TRUE, strip_d = FALSE)
-
-plot1 <- collapse_db %>% filter(!grepl(",", v_gene)) %>% group_by(v_gene) %>%
-			summarise(n_read = n(), multiple = sum(grepl(",", v_call)), single = n_read - multiple,
-					p_multiple = multiple/n_read*100, p_single = single/n_read*100) %>%
-			select(v_gene, p_single, p_multiple) %>%
-			reshape2::melt() %>%
-			ggplot(mapping = aes(v_gene, value, fill = variable)) +
-			geom_col() +
-			theme_bw() +
-			theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 0.5))
-
-ggsave("multiple_assingment_precentage_by_gene.pdf", plot1, height = 10, width = 12)
-
-plot2 <- collapse_db %>% filter(!grepl(",", v_gene)) %>% 
-			mutate(collapse_status = !!sym(threshold_column)>= threshold_collapse) %>% 
-			group_by(collapse_status, v_gene) %>%
-			summarise(n_read = n(), multiple = sum(grepl(",", v_call)), single = n_read - multiple,
-					p_multiple = multiple/n_read*100, p_single = single/n_read*100) %>%
-			select(collapse_status, v_gene, p_single, p_multiple) %>%
-			reshape2::melt(id.vars = c("v_gene", "collapse_status")) %>%
-			ggplot(mapping = aes(v_gene, value, fill = variable)) +
-			geom_col() +
-			theme_bw() +
-			theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 0.5)) +
-			facet_grid(.~collapse_status)
-
-ggsave("multiple_assingment_precentage_by_gene_and_collapse_pass.pdf", plot2, height = 10, width = 12)
-
-### Check the number of alleles, and the amount for each gene. (IMGT / ASC)
-
-plot3 <- collapse_db %>%
-  filter(!!sym(threshold_column) >= threshold_collapse, !grepl(",", v_call)) %>%
-  group_by(v_gene) %>%
-  mutate(n_read = n()) %>%
-  group_by(v_gene, v_call) %>%
-  summarise(n_calls = n(), p_calls = n_calls / n_read * 100) %>%
-  arrange(v_gene, desc(p_calls)) %>%
-  ggplot(aes(x = reorder(v_call, p_calls), y = p_calls)) + # Modified aes() function
-  geom_col() + 
-  theme_bw() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 0.5)) +
-  facet_wrap(.~v_gene, ncol = 4, scales = "free_x")
-
-ggsave("allele_precentage_by_gene.pdf", plot3, height = 40, width = 25)
-
-
-#### heatmap
-
-entropy <- function(p) colSums(-(p * log(p)), na.rm = TRUE)
-
+```{r echo=FALSE,message = FALSE,fig.width=15,fig.height=10}
 library(reshape2)
 
 filtered_data <- collapse_db %>% filter(!!sym(threshold_column)>= threshold_collapse, !grepl(",", v_call))
@@ -1000,12 +984,13 @@ process_v_call <- function(v_call_value) {
 
   seq_list <- filtered_data[filtered_data[,"v_call"] == v_call_value,][,"sequence_alignment"]
   ref_seq <- v_ref[v_call_value]
-  
   comparison_matrix <- matrix(0, nrow = length(seq_list), ncol = nchar(ref_seq))
   for (i in 1:length(seq_list)) {
     cut_seq <- substr(seq_list[[i]], 1, nchar(ref_seq))
     for (j in 1:nchar(ref_seq)) {
-      if (substr(ref_seq, j, j) == substr(cut_seq, j, j)) {
+      if(substr(cut_seq, j, j) == "."){
+      	comparison_matrix[i, j] <- 2
+      }else if (substr(ref_seq, j, j) == substr(cut_seq, j, j)) {
         comparison_matrix[i, j] <- 0
       } else {
         comparison_matrix[i, j] <- 1
@@ -1015,6 +1000,7 @@ process_v_call <- function(v_call_value) {
   
   proportion_of_ones <- colMeans(comparison_matrix == 1)
   entropy_vector <- proportion_of_ones * log2(proportion_of_ones / length(dim(comparison_matrix)[1])) * -1
+  entropy_vector[is.nan(entropy_vector)] <- 0
   max_index <- which.max(entropy_vector)
   max_value <- entropy_vector[max_index]
   data <- data.frame(position = seq_along(entropy_vector), value = entropy_vector)
@@ -1025,16 +1011,19 @@ process_v_call <- function(v_call_value) {
   labs(x = "Position",y = "entropy")+
   theme_minimal()+
   scale_x_continuous(breaks = seq(0, nchar(ref_seq), by = 10), labels = seq(0, nchar(ref_seq), by = 10)) +
-  scale_y_continuous(breaks = seq(0, max_value, by = 1), labels = seq(0,max_value, by = 1))
+  scale_y_continuous(breaks = seq(0, max_value, by = 0.1), labels = seq(0,max_value, by = 0.1))
 
 
   data_melt <- melt(comparison_matrix)
 
-  data_melt[,"color"] <- ifelse(data_melt[,"value"] == 0, "white", "blue")
+  data_melt[,"color"] <- ifelse(data_melt[,"value"] == 0, "white", 
+                              ifelse(data_melt[,"value"] == 1, "blue", "red"))
+
+  #data_melt[,"color"] <- ifelse(data_melt[,"value"] == 0, "white", "blue")
 
   heatmap_plot <- ggplot(data_melt, aes(x = Var2, y = Var1, fill = factor(value))) +
     geom_tile() +
-    scale_fill_manual(values = c("white", "blue")) +
+    scale_fill_manual(values =  c("white", "blue","red")) +
     labs(x = "Position", y = "Sequence") +
     theme_minimal() +
     theme(legend.position = "none") +  
@@ -1052,76 +1041,203 @@ process_v_call <- function(v_call_value) {
     scale_y_continuous(breaks = seq(0, length(seq_list), by = 10), labels = seq(0, length(seq_list), by = 10))
 
   library(gridExtra)
-  combined_plot <- grid.arrange(histogram_plot, heatmap_plot,entropy_plot, heights = c(1, 4,2))
-  ggsave(paste0("combined_plot_", chartr("*", "_", v_call_value), ".pdf"), plot = combined_plot, width = 10, height = 8)
+  combined_plot <- grid.arrange(histogram_plot, heatmap_plot,entropy_plot, heights = c(3,5,2))
+  invisible(combined_plot)
 }
 
 
 
 for (v_call_value in unique_v_calls) {
+  cat(v_call_value)
   process_v_call(v_call_value)
 }
 
+```
 
-"""
+EOF
+	
+open OUT, ">!{name}.rmd";
+print OUT $script;
+close OUT;
+
+'''
 
 }
 
 
-process First_Alignment_count_aligmant_pass_fail {
+process First_Alignment_render_mutation_report {
 
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*csv$/) "first_alignment_report/$filename"}
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*pdf$/) "collapse_seq_report/$filename"}
+publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*.html$/) "first_alignment_mutation_report/$filename"}
 input:
- set val(name), file(makeDb_pass) from g0_12_outputFileTSV0_g0_27
- set val(name1), file(makeDb_fail) from g0_12_outputFileTSV2_g0_27
- set val(name2), file(collapse_pass) from g0_19_outputFileTSV0_g0_27
- set val(name3), file(collapse_fail) from g0_19_outputFileTSV1_g0_27
+ file rmk from g0_38_rMarkdown0_g0_39
 
 output:
- file "*csv"  into g0_27_outFileTSV00
- file "*pdf"  into g0_27_outputFilePdf11
+ file "*.html"  into g0_39_outputFileHTML00
 
-script:
+"""
+
+#!/usr/bin/env Rscript 
+
+rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_dir=".")
+
+"""
+}
+
+
+process First_Alignment_alignment_report {
+
+input:
+ set val(name), file(makeDb_pass) from g0_12_outputFileTSV0_g0_30
+ set val(name1), file(makeDb_fail) from g0_12_outputFileTSV2_g0_30
+ set val(name2), file(collapse_pass) from g0_19_outputFileTSV0_g0_30
+ set val(name3), file(collapse_fail) from g0_19_outputFileTSV1_g0_30
+ set val(name2), file(v_ref) from g_2_germlineFastaFile_g0_30
+
+output:
+ file "*.rmd"  into g0_30_rMarkdown0_g0_37
+
+shell:
 
 readArray_makeDb_pass = makeDb_pass.toString().split(' ')
 readArray_makeDb_fail = makeDb_fail.toString().split(' ')
 readArray_collapse_pass = collapse_pass.toString().split(' ')
 readArray_collapse_fail = collapse_fail.toString().split(' ')
+readArray_v_ref = v_ref.toString().split(' ')
+
+'''
+#!/usr/bin/env perl
+
+
+my $script = <<'EOF';
+
+
+```{r echo=FALSE,message = FALSE}
+library(ggplot2)
+library(rlang)
+library(alakazam)
+library(dplyr)
+library(Biostrings)
+
+makeDb_pass<-read.csv("/home/bcrlab/veredk/M24/RJs14_collapse_filter2/RJs14_fIgsSbRb9_db-pass.tsv", sep="\t")
+makeDb_fail<-read.csv("/home/bcrlab/veredk/M24/RJs14_collapse_filter2/RJs14_fIgsSbRb9_db-fail.tsv", sep="\t")
+collapse_pass<-read.csv("/home/bcrlab/veredk/M24/RJs14_collapse_filter2/RJs14_fIgsSbRb9_db-pass_collapsed-passed.tsv", sep="\t")
+collapse_fail<-read.csv("/home/bcrlab/veredk/M24/RJs14_collapse_filter2/RJs14_fIgsSbRb9_db-pass_collapsed-failed_conscount.tsv", sep="\t")
+
+
+threshold_column <- if("consensus_count" %in% names(collapse_fail)) "consensus_count" else "duplicate_count"
+
+threshold_collapse <- max(collapse_fail[[threshold_column]])
+
+
+collapse_db <- rbind(collapse_pass, collapse_fail)
+
+```
+
+
+### Plot duplicated column after collapse
+
+```{r echo=FALSE,message = FALSE,fig.width=30,fig.height=15}
+
+p1 <- ggplot(collapse_db, aes(!!sym(threshold_column))) +
+geom_histogram(bins = 100) +
+geom_vline(xintercept=threshold_collapse, linetype="dotted", col = "red")
+
+print(p1)
+
+```
+
+
+### Number of multiple assignment per gene (IMGT / ASC)
+
+```{r echo=FALSE,message = FALSE,fig.width=30,fig.height=15}
+
+collapse_db[["v_gene"]] <- getGene(collapse_db[["v_call"]], first = F, collapse = TRUE, strip_d = FALSE)
+
+plot1 <- collapse_db %>% filter(!grepl(",", v_gene)) %>% group_by(v_gene) %>%
+			summarise(n_read = n(), multiple = sum(grepl(",", v_call)), single = n_read - multiple,
+					p_multiple = multiple/n_read*100, p_single = single/n_read*100) %>%
+			select(v_gene, p_single, p_multiple) %>%
+			reshape2::melt() %>%
+			ggplot(mapping = aes(v_gene, value, fill = variable)) +
+			geom_col() +
+			theme_bw() +
+			theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 0.5))
+
+print(plot1)
+
+```
+
+
+### Number of multiple assignment per gene (IMGT / ASC) collapse pass
+
+```{r echo=FALSE,message = FALSE,fig.width=30,fig.height=15}
+
+plot2 <- collapse_db %>% filter(!grepl(",", v_gene)) %>% 
+			mutate(collapse_status = !!sym(threshold_column)>= threshold_collapse) %>% 
+			group_by(collapse_status, v_gene) %>%
+			summarise(n_read = n(), multiple = sum(grepl(",", v_call)), single = n_read - multiple,
+					p_multiple = multiple/n_read*100, p_single = single/n_read*100) %>%
+			select(collapse_status, v_gene, p_single, p_multiple) %>%
+			reshape2::melt(id.vars = c("v_gene", "collapse_status")) %>%
+			ggplot(mapping = aes(v_gene, value, fill = variable)) +
+			geom_col() +
+			theme_bw() +
+			theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 0.5)) +
+			facet_grid(.~collapse_status)
+
+print(plot2)
+
+```
+
+
+### Check the number of alleles, and the amount for each gene. (IMGT / ASC)
+
+```{r echo=FALSE,message = FALSE,fig.width=35,fig.height=50}
+plot3 <- collapse_db %>%
+  filter(!!sym(threshold_column) >= threshold_collapse, !grepl(",", v_call)) %>%
+  group_by(v_gene) %>%
+  mutate(n_read = n()) %>%
+  group_by(v_gene, v_call) %>%
+  summarise(n_calls = n(), p_calls = n_calls / n_read * 100) %>%
+  arrange(v_gene, desc(p_calls)) %>%
+  ggplot(aes(x = reorder(v_call, p_calls), y = p_calls)) + # Modified aes() function
+  geom_col() + 
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 0.5)) +
+  facet_wrap(.~v_gene, ncol = 4, scales = "free_x")
+
+print(plot3)
+
+```
+
+
+EOF
+	
+open OUT, ">!{name}.rmd";
+print OUT $script;
+close OUT;
+
+'''
+
+}
+
+
+process First_Alignment_render_alignment_report {
+
+publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*.html$/) "first_alignment_alignment_reports/$filename"}
+input:
+ file rmk from g0_30_rMarkdown0_g0_37
+
+output:
+ file "*.html"  into g0_37_outputFileHTML00
+
 """
+
 #!/usr/bin/env Rscript 
 
-makeDb_pass<-read.csv("${readArray_makeDb_pass[0]}", sep="\t")
-makeDb_fail<-read.csv("${readArray_makeDb_fail[0]}", sep="\t")
-collapse_pass<-read.csv("${readArray_collapse_pass[0]}", sep="\t")
-collapse_fail<-read.csv("${readArray_collapse_fail[0]}", sep="\t")
-
-my_vector<-c(nrow(makeDb_pass),nrow(makeDb_fail),nrow(collapse_pass),nrow(collapse_fail))
-
-my_matrix <- matrix(my_vector, nrow = 2, byrow = TRUE)
-my_dataframe <- data.frame(row.names = c("MakeDb", "collaps"), my_matrix)
-colnames(my_dataframe) <- c("PASS", "FAIL")
-print(my_dataframe)
-write.csv(my_dataframe, "my_data.csv")
-
-## plot duplicated column
-
-file <- "duplication_count_after_collapse.pdf"
-
-library(ggplot2)
-
-p1 <- ggplot(collapse_pass, aes(duplicate_count)) +
-geom_histogram(bins = 100)
-p2 <- ggplot(collapse_fail, aes(duplicate_count)) +
-geom_histogram(bins = 100)
-
-p3 <- cowplot::plot_grid(p1,p2,nrow = 2)
-
-ggsave(file, p3, height = 10, width = 12)
-
+rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_dir=".")
 
 """
-
 }
 
 if(params.container.startsWith("peresay")){
@@ -1208,6 +1324,101 @@ for(groups in group_splits){
 #		
 
 #ggsave("ASC_allele_usage_distribution.pdf", p1, width = 12, height = 50)
+
+"""
+
+}
+
+
+process First_Alignment_tables_postion {
+
+publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*tsv$/) "first_alignment_tables_position/$filename"}
+input:
+ set val(name), file(collapse_pass) from g0_19_outputFileTSV0_g0_33
+ set val(name1), file(collapse_fail) from g0_19_outputFileTSV1_g0_33
+
+output:
+ file "*tsv"  into g0_33_outFileTSV00
+
+script:
+
+
+readArray_collapse_pass = collapse_pass.toString().split(' ')
+readArray_collapse_fail = collapse_fail.toString().split(' ')
+"""
+#!/usr/bin/env Rscript 
+
+install.packages("vegan")
+library(seqinr)
+library(vegan)
+library(dplyr)
+library(ggplot2)
+library(alakazam)
+
+collapse_pass<-read.delim("${readArray_collapse_pass[0]}", sep="\t")
+collapse_fail<-read.delim("${readArray_collapse_fail[0]}", sep="\t")
+
+datadf <- rbind(collapse_pass, collapse_fail)
+datadf[,"v_gene"] <- getGene(datadf[,"v_call"])
+
+positionInfo <- function(data, v_gene, verbose=TRUE){
+    info <- list()
+    if(verbose){cat(paste0("Analyzing positions for V gene: ",v_gene,"\n"))}
+    for (i in 1:(nchar(as.character(data[1,"sequence_alignment"])))){
+        ss <- substr(data[,"sequence_alignment"],i,i)
+        ss <- toupper(ss)
+        df <- data.frame(base=unique(ss))
+        tmp <- c()
+        for ( j in 1:length(unique(ss))){
+            tmp[j] <- length(grep(df[j,1], ss))
+        }
+        df[,"rep"] <- tmp
+        rownames(df) <- as.character(df[,1])
+        df[,1] <- NULL
+        dff <- subset(df, rownames(df)!="-")
+        
+        info[[i]] <- list(
+            shan = vegan::diversity(t(df)),                                    # Shannon entropy of position
+            shanc = ifelse(nrow(dff)==0, NA, vegan::diversity(t(dff))),        # Shannon entropy of position removing gaps ("-")
+            rich = length(unique(ss)),                                  # Position richness
+            richc = ifelse(nrow(dff)==0, NA, length(rownames(dff))),    # Position richness removing gaps ("-")
+            uniq = paste(unique(ss), collapse = "|"),                                    # Unique bases in position
+            repe = paste(tmp, collapse = "|")                                           # Repetitions of the unique bases in position
+        )
+
+        print(unique(ss))
+        if(verbose){
+            if((i %% (round(nchar(as.character(data[1,"sequence_alignment"]))*0.1,0))) == 0){message("  ", round(i/nchar(as.character(data[1,"sequence_alignment"]))*100, 0), "%")}
+        }
+    }
+
+    if(verbose){cat("Creating the data frame with the information \n")}
+
+    df <- data.frame(v_gene = v_gene,
+                     posi=c(1:length(info)),
+                     shan=sapply(info, `[[`, "shan"),
+                     shanc=sapply(info, `[[`, "shanc"),
+                     rich=sapply(info, `[[`, "rich"),
+                     richc=sapply(info, `[[`, "richc"),
+                     uniq=sapply(info, `[[`, "uniq"),
+                     repe=sapply(info, `[[`, "repe"))
+    
+    if(verbose){cat("Finished \n")}
+    return(df)
+}
+
+replace_dots <- function(x) {
+  chartr(".", "-", x)
+}
+df <- data.frame(lapply(datadf, replace_dots))
+
+filtered_data <- df %>% filter(!grepl(",", v_call))
+
+info <- lapply(unique(filtered_data[,"v_call"]), function(g){
+ x <- positionInfo( filtered_data[filtered_data[,"v_call"] == g,],g)
+ write.table(x, paste0( chartr("*", "_", g) , "_positionInfo.tsv"), quote=FALSE, row.names=FALSE, sep="\t")
+})
+
 
 """
 
@@ -1347,9 +1558,9 @@ input:
  set val(name3), file(j_germline_file) from g_8_germlineFastaFile1_g11_12
 
 output:
- set val(name_igblast),file("*_db-pass.tsv") optional true  into g11_12_outputFileTSV0_g11_19, g11_12_outputFileTSV0_g11_27, g11_12_outputFileTSV0_g11_30
+ set val(name_igblast),file("*_db-pass.tsv") optional true  into g11_12_outputFileTSV0_g11_19, g11_12_outputFileTSV0_g11_30, g11_12_outputFileTSV0_g11_38, g11_12_outputFileTSV0_g11_27
  set val("reference_set"), file("${reference_set}") optional true  into g11_12_germlineFastaFile11
- set val(name_igblast),file("*_db-fail.tsv")  into g11_12_outputFileTSV2_g11_27, g11_12_outputFileTSV2_g11_30
+ set val(name_igblast),file("*_db-fail.tsv")  into g11_12_outputFileTSV2_g11_30, g11_12_outputFileTSV2_g11_38, g11_12_outputFileTSV2_g11_27
 
 script:
 
@@ -1407,8 +1618,8 @@ input:
  set val(name),file(airrFile) from g11_12_outputFileTSV0_g11_19
 
 output:
- set val("passed"), file("${outfile}"+"passed.tsv") optional true  into g11_19_outputFileTSV0_g11_27, g11_19_outputFileTSV0_g11_30, g11_19_outputFileTSV0_g_15
- set val("failed"), file("${outfile}"+"failed*") optional true  into g11_19_outputFileTSV1_g11_27, g11_19_outputFileTSV1_g11_30
+ set val("passed"), file("${outfile}"+"passed.tsv") optional true  into g11_19_outputFileTSV0_g11_33, g11_19_outputFileTSV0_g11_30, g11_19_outputFileTSV0_g11_38, g11_19_outputFileTSV0_g11_27, g11_19_outputFileTSV0_g_15
+ set val("failed"), file("${outfile}"+"failed*") optional true  into g11_19_outputFileTSV1_g11_33, g11_19_outputFileTSV1_g11_30, g11_19_outputFileTSV1_g11_38, g11_19_outputFileTSV1_g11_27
 
 script:
 conscount_min = params.Second_Alignment_Collapse_AIRRseq.conscount_min
@@ -1666,7 +1877,7 @@ input:
  set val("v_novel"), file(v_novel_germline_file) from g_8_germlineFastaFile1_g_15
 
 output:
- set val(airr_name), file(airrSeqClone)  into g_15_outputFileTSV0_g14_0
+ set val(airr_name), file(airrSeqClone)  into g_15_outputFileTSV0_g14_0, g_15_outputFileTSV0_g14_9
  set val(germ_name), file(germlineClone)  into g_15_germlineFastaFile1_g_29, g_15_germlineFastaFile1_g14_0, g_15_germlineFastaFile1_g14_1
 
 script: 
@@ -1872,18 +2083,19 @@ CreateGermlines.py \
 
 process Clone_AIRRseq_single_clone_representative {
 
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.pdf$/) "clone_report/$filename"}
+publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*.pdf$/) "clone_report/$filename"}
 input:
  set val(name),file(airrFile) from g14_1_outputFileTSV0_g14_9
+ set val(name1),file(source_airrFile) from g_15_outputFileTSV0_g14_9
 
 output:
  set val(outname),file(outfile)  into g14_9_outputFileTSV0_g_29, g14_9_outputFileTSV0_g_30, g14_9_outputFileTSV0_g_31
- file ".pdf" optional true  into g14_9_outputFilePdf11
+ file "*.pdf" optional true  into g14_9_outputFilePdf11
+ set val(name), file("*txt")  into g14_9_logFile2_g_63
 
 script:
 outname = airrFile.toString() - '.tsv' +"_clone_rep-passed"
 outfile = outname + ".tsv"
-
 
 """
 #!/usr/bin/env Rscript
@@ -1952,6 +2164,8 @@ sourceCpp(code = src)
 
 data <- readr::read_tsv("${airrFile}")
 
+source_data <- readr::read_tsv("${source_airrFile}")
+
 # calculating mutation between IMGT sequence and the germline sequence, selecting a single sequence to each clone with the fewest mutations
 data[["mut"]] <- sapply(1:nrow(data),function(j){
 	x <- c(data[['sequence_alignment']][j], data[['germline_alignment_d_mask']][j])
@@ -1973,9 +2187,45 @@ p1 <- ggplot(data_report, aes(clone_size)) +
 
 ggsave("clone_distribution_by_v_call.pdf", p1, width = 12, height = 25)
 
+max_clone_sizes <- data_report %>%
+  group_by(v_gene) %>%
+  summarize(max_clone_size = max(clone_size))
+
+# Create a list of plots
+plots <- lapply(seq(nrow(max_clone_sizes)), function(i) {
+  ggplot(data_report %>% filter(v_gene == max_clone_sizes[i,"v_gene"]), aes(clone_size)) +
+    geom_histogram(bins = max_clone_sizes[i,"max_clone_size"]) +
+    ggtitle(paste("v_gene =", max_clone_sizes[i,"v_gene"]))
+})
+
+# Combine the list of plots into a single plot
+library(gridExtra)
+final_plot <- do.call(grid.arrange, plots)
+
+
+ggsave("new_clone_distribution_by_v_call.pdf", final_plot, width = 30, height = 40)
+
+
+
 data <- data %>% dplyr::group_by(clone_id) %>% dplyr::slice(which.min(mut))
 cat(paste0('Note ', nrow(data),' sequences after selecting single representative'))
 readr::write_tsv(data, file = "${outfile}")
+
+x <- nrow(source_data)-nrow(data)
+
+lines <- c(
+    paste("START>", "After picking clonal representatives"),
+    paste("PASS>", nrow(data)),
+    paste("FAIL>", x),
+    paste("END>", "After picking clonal representatives"),
+    ""
+  )
+
+
+file_path <- paste("${outname}","output.txt", sep="-")
+
+cat(lines, sep = "\n", file = file_path, append = TRUE)
+
 """
 }
 
@@ -2265,18 +2515,16 @@ writeFasta(germline_db_new, file = paste0("${call}","_personal_reference.fasta")
 }
 
 
-process Second_Alignment_alignment_report {
+process Second_Alignment_count_aligmant_pass_fail {
 
 input:
- set val(name), file(makeDb_pass) from g11_12_outputFileTSV0_g11_30
- set val(name1), file(makeDb_fail) from g11_12_outputFileTSV2_g11_30
- set val(name2), file(collapse_pass) from g11_19_outputFileTSV0_g11_30
- set val(name3), file(collapse_fail) from g11_19_outputFileTSV1_g11_30
- set val(name2), file(v_ref) from g_2_germlineFastaFile_g11_30
+ set val(name), file(makeDb_pass) from g11_12_outputFileTSV0_g11_27
+ set val(name1), file(makeDb_fail) from g11_12_outputFileTSV2_g11_27
+ set val(name2), file(collapse_pass) from g11_19_outputFileTSV0_g11_27
+ set val(name3), file(collapse_fail) from g11_19_outputFileTSV1_g11_27
 
 output:
- file "*csv"  into g11_30_outFileTSV00
- file "*pdf"  into g11_30_outputFilePdf11
+ set val(name), file("*txt")  into g11_27_logFile00
 
 script:
 
@@ -2284,22 +2532,77 @@ readArray_makeDb_pass = makeDb_pass.toString().split(' ')
 readArray_makeDb_fail = makeDb_fail.toString().split(' ')
 readArray_collapse_pass = collapse_pass.toString().split(' ')
 readArray_collapse_fail = collapse_fail.toString().split(' ')
-readArray_v_ref = v_ref.toString().split(' ')
+
 """
 #!/usr/bin/env Rscript 
+
+makeDb_pass<-read.csv("${readArray_makeDb_pass[0]}", sep="\t")
+makeDb_fail<-read.csv("${readArray_makeDb_fail[0]}", sep="\t")
+collapse_pass<-read.csv("${readArray_collapse_pass[0]}", sep="\t")
+collapse_fail<-read.csv("${readArray_collapse_fail[0]}", sep="\t")
+
+x<-"${readArray_makeDb_fail[0]}"
+
+lines <- c(
+    paste("START>", "After IgBLAST+makedb"),
+    paste("PASS>", nrow(makeDb_pass)),
+    paste("FAIL>", nrow(makeDb_fail)),
+    paste("END>", "After IgBLAST+makedb"),
+    "",
+    paste("START>", "after DUPCOUNT filter"),
+    paste("PASS>", nrow(collapse_pass)),
+    paste("FAIL>", nrow(collapse_fail)),
+    paste("END>", "after DUPCOUNT filter"),
+    ""
+  )
+
+
+file_path <- paste(chartr(".", "1", x),"output.txt", sep="-")
+
+cat(lines, sep = "\n", file = file_path, append = TRUE)
+"""
+
+}
+
+
+process Second_Alignment_mutation_report {
+
+input:
+ set val(name), file(makeDb_pass) from g11_12_outputFileTSV0_g11_38
+ set val(name1), file(makeDb_fail) from g11_12_outputFileTSV2_g11_38
+ set val(name2), file(collapse_pass) from g11_19_outputFileTSV0_g11_38
+ set val(name3), file(collapse_fail) from g11_19_outputFileTSV1_g11_38
+ set val(name2), file(v_ref) from g_2_germlineFastaFile_g11_38
+
+output:
+ file "*.rmd"  into g11_38_rMarkdown0_g11_39
+
+shell:
+
+readArray_makeDb_pass = makeDb_pass.toString().split(' ')
+readArray_makeDb_fail = makeDb_fail.toString().split(' ')
+readArray_collapse_pass = collapse_pass.toString().split(' ')
+readArray_collapse_fail = collapse_fail.toString().split(' ')
+readArray_v_ref = v_ref.toString().split(' ')
+
+'''
+#!/usr/bin/env perl
+
+
+my $script = <<'EOF';
+
+
+```{r echo=FALSE,message = FALSE}
 library(ggplot2)
 library(rlang)
 library(alakazam)
 library(dplyr)
 library(Biostrings)
 
-makeDb_pass<-read.csv("${readArray_makeDb_pass[0]}", sep="\t")
-makeDb_fail<-read.csv("${readArray_makeDb_fail[0]}", sep="\t")
-collapse_pass<-read.csv("${readArray_collapse_pass[0]}", sep="\t")
-collapse_fail<-read.csv("${readArray_collapse_fail[0]}", sep="\t")
-v_ref<-readDNAStringSet("${readArray_v_ref[0]}")
+collapse_pass<-read.csv("/home/bcrlab/veredk/M24/RJs14_collapse_filter2/RJs14_fIgsSbRb9_db-pass_collapsed-passed.tsv", sep="\t")
+collapse_fail<-read.csv("/home/bcrlab/veredk/M24/RJs14_collapse_filter2/RJs14_fIgsSbRb9_db-pass_collapsed-failed_conscount.tsv", sep="\t")
+v_ref<-readDNAStringSet("/home/bcrlab/veredk/M24/IGH/V_gapped.fasta")
 v_ref<-as.character(v_ref)
-
 
 threshold_column <- if("consensus_count" %in% names(collapse_fail)) "consensus_count" else "duplicate_count"
 
@@ -2308,81 +2611,9 @@ threshold_collapse <- max(collapse_fail[[threshold_column]])
 
 collapse_db <- rbind(collapse_pass, collapse_fail)
 
+```
 
-
-
-# number of pass reads in each step
-
-my_vector<-c(nrow(makeDb_pass),nrow(makeDb_fail),nrow(collapse_pass),nrow(collapse_fail))
-my_matrix <- matrix(my_vector, nrow = 2, byrow = TRUE)
-my_dataframe <- data.frame(row.names = c("MakeDb", "collaps"), my_matrix)
-colnames(my_dataframe) <- c("PASS", "FAIL")
-print(my_dataframe)
-write.csv(my_dataframe, "my_data.csv")
-
-## plot duplicated column
-
-file <- "duplication_count_after_collapse.pdf"
-
-p1 <- ggplot(collapse_db, aes(!!sym(threshold_column))) +
-geom_histogram(bins = 100) +
-geom_vline(xintercept=threshold_collapse, linetype="dotted", col = "red")
-
-ggsave(file, p1, height = 10, width = 12)
-
-## number of multiple assignment per gene (IMGT / ASC)
-
-collapse_db[["v_gene"]] <- getGene(collapse_db[["v_call"]], first = F, collapse = TRUE, strip_d = FALSE)
-
-plot1 <- collapse_db %>% filter(!grepl(",", v_gene)) %>% group_by(v_gene) %>%
-			summarise(n_read = n(), multiple = sum(grepl(",", v_call)), single = n_read - multiple,
-					p_multiple = multiple/n_read*100, p_single = single/n_read*100) %>%
-			select(v_gene, p_single, p_multiple) %>%
-			reshape2::melt() %>%
-			ggplot(mapping = aes(v_gene, value, fill = variable)) +
-			geom_col() +
-			theme_bw() +
-			theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 0.5))
-
-ggsave("multiple_assingment_precentage_by_gene.pdf", plot1, height = 10, width = 12)
-
-plot2 <- collapse_db %>% filter(!grepl(",", v_gene)) %>% 
-			mutate(collapse_status = !!sym(threshold_column)>= threshold_collapse) %>% 
-			group_by(collapse_status, v_gene) %>%
-			summarise(n_read = n(), multiple = sum(grepl(",", v_call)), single = n_read - multiple,
-					p_multiple = multiple/n_read*100, p_single = single/n_read*100) %>%
-			select(collapse_status, v_gene, p_single, p_multiple) %>%
-			reshape2::melt(id.vars = c("v_gene", "collapse_status")) %>%
-			ggplot(mapping = aes(v_gene, value, fill = variable)) +
-			geom_col() +
-			theme_bw() +
-			theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 0.5)) +
-			facet_grid(.~collapse_status)
-
-ggsave("multiple_assingment_precentage_by_gene_and_collapse_pass.pdf", plot2, height = 10, width = 12)
-
-### Check the number of alleles, and the amount for each gene. (IMGT / ASC)
-
-plot3 <- collapse_db %>%
-  filter(!!sym(threshold_column) >= threshold_collapse, !grepl(",", v_call)) %>%
-  group_by(v_gene) %>%
-  mutate(n_read = n()) %>%
-  group_by(v_gene, v_call) %>%
-  summarise(n_calls = n(), p_calls = n_calls / n_read * 100) %>%
-  arrange(v_gene, desc(p_calls)) %>%
-  ggplot(aes(x = reorder(v_call, p_calls), y = p_calls)) + # Modified aes() function
-  geom_col() + 
-  theme_bw() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 0.5)) +
-  facet_wrap(.~v_gene, ncol = 4, scales = "free_x")
-
-ggsave("allele_precentage_by_gene.pdf", plot3, height = 40, width = 25)
-
-
-#### heatmap
-
-entropy <- function(p) colSums(-(p * log(p)), na.rm = TRUE)
-
+```{r echo=FALSE,message = FALSE,fig.width=15,fig.height=10}
 library(reshape2)
 
 filtered_data <- collapse_db %>% filter(!!sym(threshold_column)>= threshold_collapse, !grepl(",", v_call))
@@ -2394,12 +2625,13 @@ process_v_call <- function(v_call_value) {
 
   seq_list <- filtered_data[filtered_data[,"v_call"] == v_call_value,][,"sequence_alignment"]
   ref_seq <- v_ref[v_call_value]
-  
   comparison_matrix <- matrix(0, nrow = length(seq_list), ncol = nchar(ref_seq))
   for (i in 1:length(seq_list)) {
     cut_seq <- substr(seq_list[[i]], 1, nchar(ref_seq))
     for (j in 1:nchar(ref_seq)) {
-      if (substr(ref_seq, j, j) == substr(cut_seq, j, j)) {
+      if(substr(cut_seq, j, j) == "."){
+      	comparison_matrix[i, j] <- 2
+      }else if (substr(ref_seq, j, j) == substr(cut_seq, j, j)) {
         comparison_matrix[i, j] <- 0
       } else {
         comparison_matrix[i, j] <- 1
@@ -2409,6 +2641,7 @@ process_v_call <- function(v_call_value) {
   
   proportion_of_ones <- colMeans(comparison_matrix == 1)
   entropy_vector <- proportion_of_ones * log2(proportion_of_ones / length(dim(comparison_matrix)[1])) * -1
+  entropy_vector[is.nan(entropy_vector)] <- 0
   max_index <- which.max(entropy_vector)
   max_value <- entropy_vector[max_index]
   data <- data.frame(position = seq_along(entropy_vector), value = entropy_vector)
@@ -2419,16 +2652,19 @@ process_v_call <- function(v_call_value) {
   labs(x = "Position",y = "entropy")+
   theme_minimal()+
   scale_x_continuous(breaks = seq(0, nchar(ref_seq), by = 10), labels = seq(0, nchar(ref_seq), by = 10)) +
-  scale_y_continuous(breaks = seq(0, max_value, by = 1), labels = seq(0,max_value, by = 1))
+  scale_y_continuous(breaks = seq(0, max_value, by = 0.1), labels = seq(0,max_value, by = 0.1))
 
 
   data_melt <- melt(comparison_matrix)
 
-  data_melt[,"color"] <- ifelse(data_melt[,"value"] == 0, "white", "blue")
+  data_melt[,"color"] <- ifelse(data_melt[,"value"] == 0, "white", 
+                              ifelse(data_melt[,"value"] == 1, "blue", "red"))
+
+  #data_melt[,"color"] <- ifelse(data_melt[,"value"] == 0, "white", "blue")
 
   heatmap_plot <- ggplot(data_melt, aes(x = Var2, y = Var1, fill = factor(value))) +
     geom_tile() +
-    scale_fill_manual(values = c("white", "blue")) +
+    scale_fill_manual(values =  c("white", "blue","red")) +
     labs(x = "Position", y = "Sequence") +
     theme_minimal() +
     theme(legend.position = "none") +  
@@ -2446,70 +2682,291 @@ process_v_call <- function(v_call_value) {
     scale_y_continuous(breaks = seq(0, length(seq_list), by = 10), labels = seq(0, length(seq_list), by = 10))
 
   library(gridExtra)
-  combined_plot <- grid.arrange(histogram_plot, heatmap_plot,entropy_plot, heights = c(1, 4,2))
-  ggsave(paste0("combined_plot_", chartr("*", "_", v_call_value), ".pdf"), plot = combined_plot, width = 10, height = 8)
+  combined_plot <- grid.arrange(histogram_plot, heatmap_plot,entropy_plot, heights = c(3,5,2))
+  invisible(combined_plot)
 }
 
 
 
 for (v_call_value in unique_v_calls) {
+  cat(v_call_value)
   process_v_call(v_call_value)
 }
 
+```
 
-"""
+EOF
+	
+open OUT, ">!{name}.rmd";
+print OUT $script;
+close OUT;
+
+'''
 
 }
 
 
-process Second_Alignment_count_aligmant_pass_fail {
+process Second_Alignment_render_mutation_report {
 
 input:
- set val(name), file(makeDb_pass) from g11_12_outputFileTSV0_g11_27
- set val(name1), file(makeDb_fail) from g11_12_outputFileTSV2_g11_27
- set val(name2), file(collapse_pass) from g11_19_outputFileTSV0_g11_27
- set val(name3), file(collapse_fail) from g11_19_outputFileTSV1_g11_27
+ file rmk from g11_38_rMarkdown0_g11_39
 
 output:
- file "*csv"  into g11_27_outFileTSV00
- file "*pdf"  into g11_27_outputFilePdf11
+ file "*.html"  into g11_39_outputFileHTML00
 
-script:
+"""
+
+#!/usr/bin/env Rscript 
+
+rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_dir=".")
+
+"""
+}
+
+
+process Second_Alignment_alignment_report {
+
+input:
+ set val(name), file(makeDb_pass) from g11_12_outputFileTSV0_g11_30
+ set val(name1), file(makeDb_fail) from g11_12_outputFileTSV2_g11_30
+ set val(name2), file(collapse_pass) from g11_19_outputFileTSV0_g11_30
+ set val(name3), file(collapse_fail) from g11_19_outputFileTSV1_g11_30
+ set val(name2), file(v_ref) from g_2_germlineFastaFile_g11_30
+
+output:
+ file "*.rmd"  into g11_30_rMarkdown0_g11_37
+
+shell:
 
 readArray_makeDb_pass = makeDb_pass.toString().split(' ')
 readArray_makeDb_fail = makeDb_fail.toString().split(' ')
 readArray_collapse_pass = collapse_pass.toString().split(' ')
 readArray_collapse_fail = collapse_fail.toString().split(' ')
+readArray_v_ref = v_ref.toString().split(' ')
+
+'''
+#!/usr/bin/env perl
+
+
+my $script = <<'EOF';
+
+
+```{r echo=FALSE,message = FALSE}
+library(ggplot2)
+library(rlang)
+library(alakazam)
+library(dplyr)
+library(Biostrings)
+
+makeDb_pass<-read.csv("/home/bcrlab/veredk/M24/RJs14_collapse_filter2/RJs14_fIgsSbRb9_db-pass.tsv", sep="\t")
+makeDb_fail<-read.csv("/home/bcrlab/veredk/M24/RJs14_collapse_filter2/RJs14_fIgsSbRb9_db-fail.tsv", sep="\t")
+collapse_pass<-read.csv("/home/bcrlab/veredk/M24/RJs14_collapse_filter2/RJs14_fIgsSbRb9_db-pass_collapsed-passed.tsv", sep="\t")
+collapse_fail<-read.csv("/home/bcrlab/veredk/M24/RJs14_collapse_filter2/RJs14_fIgsSbRb9_db-pass_collapsed-failed_conscount.tsv", sep="\t")
+
+
+threshold_column <- if("consensus_count" %in% names(collapse_fail)) "consensus_count" else "duplicate_count"
+
+threshold_collapse <- max(collapse_fail[[threshold_column]])
+
+
+collapse_db <- rbind(collapse_pass, collapse_fail)
+
+```
+
+
+### Plot duplicated column after collapse
+
+```{r echo=FALSE,message = FALSE,fig.width=30,fig.height=15}
+
+p1 <- ggplot(collapse_db, aes(!!sym(threshold_column))) +
+geom_histogram(bins = 100) +
+geom_vline(xintercept=threshold_collapse, linetype="dotted", col = "red")
+
+print(p1)
+
+```
+
+
+### Number of multiple assignment per gene (IMGT / ASC)
+
+```{r echo=FALSE,message = FALSE,fig.width=30,fig.height=15}
+
+collapse_db[["v_gene"]] <- getGene(collapse_db[["v_call"]], first = F, collapse = TRUE, strip_d = FALSE)
+
+plot1 <- collapse_db %>% filter(!grepl(",", v_gene)) %>% group_by(v_gene) %>%
+			summarise(n_read = n(), multiple = sum(grepl(",", v_call)), single = n_read - multiple,
+					p_multiple = multiple/n_read*100, p_single = single/n_read*100) %>%
+			select(v_gene, p_single, p_multiple) %>%
+			reshape2::melt() %>%
+			ggplot(mapping = aes(v_gene, value, fill = variable)) +
+			geom_col() +
+			theme_bw() +
+			theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 0.5))
+
+print(plot1)
+
+```
+
+
+### Number of multiple assignment per gene (IMGT / ASC) collapse pass
+
+```{r echo=FALSE,message = FALSE,fig.width=30,fig.height=15}
+
+plot2 <- collapse_db %>% filter(!grepl(",", v_gene)) %>% 
+			mutate(collapse_status = !!sym(threshold_column)>= threshold_collapse) %>% 
+			group_by(collapse_status, v_gene) %>%
+			summarise(n_read = n(), multiple = sum(grepl(",", v_call)), single = n_read - multiple,
+					p_multiple = multiple/n_read*100, p_single = single/n_read*100) %>%
+			select(collapse_status, v_gene, p_single, p_multiple) %>%
+			reshape2::melt(id.vars = c("v_gene", "collapse_status")) %>%
+			ggplot(mapping = aes(v_gene, value, fill = variable)) +
+			geom_col() +
+			theme_bw() +
+			theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 0.5)) +
+			facet_grid(.~collapse_status)
+
+print(plot2)
+
+```
+
+
+### Check the number of alleles, and the amount for each gene. (IMGT / ASC)
+
+```{r echo=FALSE,message = FALSE,fig.width=35,fig.height=50}
+plot3 <- collapse_db %>%
+  filter(!!sym(threshold_column) >= threshold_collapse, !grepl(",", v_call)) %>%
+  group_by(v_gene) %>%
+  mutate(n_read = n()) %>%
+  group_by(v_gene, v_call) %>%
+  summarise(n_calls = n(), p_calls = n_calls / n_read * 100) %>%
+  arrange(v_gene, desc(p_calls)) %>%
+  ggplot(aes(x = reorder(v_call, p_calls), y = p_calls)) + # Modified aes() function
+  geom_col() + 
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 0.5)) +
+  facet_wrap(.~v_gene, ncol = 4, scales = "free_x")
+
+print(plot3)
+
+```
+
+
+EOF
+	
+open OUT, ">!{name}.rmd";
+print OUT $script;
+close OUT;
+
+'''
+
+}
+
+
+process Second_Alignment_render_alignment_report {
+
+input:
+ file rmk from g11_30_rMarkdown0_g11_37
+
+output:
+ file "*.html"  into g11_37_outputFileHTML00
+
+"""
+
+#!/usr/bin/env Rscript 
+
+rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_dir=".")
+
+"""
+}
+
+
+process Second_Alignment_tables_postion {
+
+input:
+ set val(name), file(collapse_pass) from g11_19_outputFileTSV0_g11_33
+ set val(name1), file(collapse_fail) from g11_19_outputFileTSV1_g11_33
+
+output:
+ file "*tsv"  into g11_33_outFileTSV00
+
+script:
+
+
+readArray_collapse_pass = collapse_pass.toString().split(' ')
+readArray_collapse_fail = collapse_fail.toString().split(' ')
 """
 #!/usr/bin/env Rscript 
 
-makeDb_pass<-read.csv("${readArray_makeDb_pass[0]}", sep="\t")
-makeDb_fail<-read.csv("${readArray_makeDb_fail[0]}", sep="\t")
-collapse_pass<-read.csv("${readArray_collapse_pass[0]}", sep="\t")
-collapse_fail<-read.csv("${readArray_collapse_fail[0]}", sep="\t")
-
-my_vector<-c(nrow(makeDb_pass),nrow(makeDb_fail),nrow(collapse_pass),nrow(collapse_fail))
-
-my_matrix <- matrix(my_vector, nrow = 2, byrow = TRUE)
-my_dataframe <- data.frame(row.names = c("MakeDb", "collaps"), my_matrix)
-colnames(my_dataframe) <- c("PASS", "FAIL")
-print(my_dataframe)
-write.csv(my_dataframe, "my_data.csv")
-
-## plot duplicated column
-
-file <- "duplication_count_after_collapse.pdf"
-
+install.packages("vegan")
+library(seqinr)
+library(vegan)
+library(dplyr)
 library(ggplot2)
+library(alakazam)
 
-p1 <- ggplot(collapse_pass, aes(duplicate_count)) +
-geom_histogram(bins = 100)
-p2 <- ggplot(collapse_fail, aes(duplicate_count)) +
-geom_histogram(bins = 100)
+collapse_pass<-read.delim("${readArray_collapse_pass[0]}", sep="\t")
+collapse_fail<-read.delim("${readArray_collapse_fail[0]}", sep="\t")
 
-p3 <- cowplot::plot_grid(p1,p2,nrow = 2)
+datadf <- rbind(collapse_pass, collapse_fail)
+datadf[,"v_gene"] <- getGene(datadf[,"v_call"])
 
-ggsave(file, p3, height = 10, width = 12)
+positionInfo <- function(data, v_gene, verbose=TRUE){
+    info <- list()
+    if(verbose){cat(paste0("Analyzing positions for V gene: ",v_gene,"\n"))}
+    for (i in 1:(nchar(as.character(data[1,"sequence_alignment"])))){
+        ss <- substr(data[,"sequence_alignment"],i,i)
+        ss <- toupper(ss)
+        df <- data.frame(base=unique(ss))
+        tmp <- c()
+        for ( j in 1:length(unique(ss))){
+            tmp[j] <- length(grep(df[j,1], ss))
+        }
+        df[,"rep"] <- tmp
+        rownames(df) <- as.character(df[,1])
+        df[,1] <- NULL
+        dff <- subset(df, rownames(df)!="-")
+        
+        info[[i]] <- list(
+            shan = vegan::diversity(t(df)),                                    # Shannon entropy of position
+            shanc = ifelse(nrow(dff)==0, NA, vegan::diversity(t(dff))),        # Shannon entropy of position removing gaps ("-")
+            rich = length(unique(ss)),                                  # Position richness
+            richc = ifelse(nrow(dff)==0, NA, length(rownames(dff))),    # Position richness removing gaps ("-")
+            uniq = paste(unique(ss), collapse = "|"),                                    # Unique bases in position
+            repe = paste(tmp, collapse = "|")                                           # Repetitions of the unique bases in position
+        )
+
+        print(unique(ss))
+        if(verbose){
+            if((i %% (round(nchar(as.character(data[1,"sequence_alignment"]))*0.1,0))) == 0){message("  ", round(i/nchar(as.character(data[1,"sequence_alignment"]))*100, 0), "%")}
+        }
+    }
+
+    if(verbose){cat("Creating the data frame with the information \n")}
+
+    df <- data.frame(v_gene = v_gene,
+                     posi=c(1:length(info)),
+                     shan=sapply(info, `[[`, "shan"),
+                     shanc=sapply(info, `[[`, "shanc"),
+                     rich=sapply(info, `[[`, "rich"),
+                     richc=sapply(info, `[[`, "richc"),
+                     uniq=sapply(info, `[[`, "uniq"),
+                     repe=sapply(info, `[[`, "repe"))
+    
+    if(verbose){cat("Finished \n")}
+    return(df)
+}
+
+replace_dots <- function(x) {
+  chartr(".", "-", x)
+}
+df <- data.frame(lapply(datadf, replace_dots))
+
+filtered_data <- df %>% filter(!grepl(",", v_call))
+
+info <- lapply(unique(filtered_data[,"v_call"]), function(g){
+ x <- positionInfo( filtered_data[filtered_data[,"v_call"] == g,],g)
+ write.table(x, paste0( chartr("*", "_", g) , "_positionInfo.tsv"), quote=FALSE, row.names=FALSE, sep="\t")
+})
 
 
 """
@@ -2648,9 +3105,9 @@ input:
  set val(name3), file(j_germline_file) from g_31_germlineFastaFile1_g21_12
 
 output:
- set val(name_igblast),file("*_db-pass.tsv") optional true  into g21_12_outputFileTSV0_g21_19, g21_12_outputFileTSV0_g21_27, g21_12_outputFileTSV0_g21_30
+ set val(name_igblast),file("*_db-pass.tsv") optional true  into g21_12_outputFileTSV0_g21_19, g21_12_outputFileTSV0_g21_30, g21_12_outputFileTSV0_g21_38, g21_12_outputFileTSV0_g21_27
  set val("reference_set"), file("${reference_set}") optional true  into g21_12_germlineFastaFile11
- set val(name_igblast),file("*_db-fail.tsv")  into g21_12_outputFileTSV2_g21_27, g21_12_outputFileTSV2_g21_30
+ set val(name_igblast),file("*_db-fail.tsv")  into g21_12_outputFileTSV2_g21_30, g21_12_outputFileTSV2_g21_38, g21_12_outputFileTSV2_g21_27
 
 script:
 
@@ -2708,8 +3165,8 @@ input:
  set val(name),file(airrFile) from g21_12_outputFileTSV0_g21_19
 
 output:
- set val("passed"), file("${outfile}"+"passed.tsv") optional true  into g21_19_outputFileTSV0_g21_27, g21_19_outputFileTSV0_g21_30, g21_19_outputFileTSV0_g_37
- set val("failed"), file("${outfile}"+"failed*") optional true  into g21_19_outputFileTSV1_g21_27, g21_19_outputFileTSV1_g21_30
+ set val("passed"), file("${outfile}"+"passed.tsv") optional true  into g21_19_outputFileTSV0_g21_33, g21_19_outputFileTSV0_g21_30, g21_19_outputFileTSV0_g21_38, g21_19_outputFileTSV0_g21_27, g21_19_outputFileTSV0_g_37
+ set val("failed"), file("${outfile}"+"failed*") optional true  into g21_19_outputFileTSV1_g21_33, g21_19_outputFileTSV1_g21_30, g21_19_outputFileTSV1_g21_38, g21_19_outputFileTSV1_g21_27
 
 script:
 conscount_min = params.Third_Alignment_Collapse_AIRRseq.conscount_min
@@ -3008,18 +3465,16 @@ run_ogrdbstats \
 }
 
 
-process Third_Alignment_alignment_report {
+process Third_Alignment_count_aligmant_pass_fail {
 
 input:
- set val(name), file(makeDb_pass) from g21_12_outputFileTSV0_g21_30
- set val(name1), file(makeDb_fail) from g21_12_outputFileTSV2_g21_30
- set val(name2), file(collapse_pass) from g21_19_outputFileTSV0_g21_30
- set val(name3), file(collapse_fail) from g21_19_outputFileTSV1_g21_30
- set val(name2), file(v_ref) from g_2_germlineFastaFile_g21_30
+ set val(name), file(makeDb_pass) from g21_12_outputFileTSV0_g21_27
+ set val(name1), file(makeDb_fail) from g21_12_outputFileTSV2_g21_27
+ set val(name2), file(collapse_pass) from g21_19_outputFileTSV0_g21_27
+ set val(name3), file(collapse_fail) from g21_19_outputFileTSV1_g21_27
 
 output:
- file "*csv"  into g21_30_outFileTSV00
- file "*pdf"  into g21_30_outputFilePdf11
+ set val(name), file("*txt")  into g21_27_logFile0_g_63
 
 script:
 
@@ -3027,22 +3482,120 @@ readArray_makeDb_pass = makeDb_pass.toString().split(' ')
 readArray_makeDb_fail = makeDb_fail.toString().split(' ')
 readArray_collapse_pass = collapse_pass.toString().split(' ')
 readArray_collapse_fail = collapse_fail.toString().split(' ')
-readArray_v_ref = v_ref.toString().split(' ')
+
 """
 #!/usr/bin/env Rscript 
+
+makeDb_pass<-read.csv("${readArray_makeDb_pass[0]}", sep="\t")
+makeDb_fail<-read.csv("${readArray_makeDb_fail[0]}", sep="\t")
+collapse_pass<-read.csv("${readArray_collapse_pass[0]}", sep="\t")
+collapse_fail<-read.csv("${readArray_collapse_fail[0]}", sep="\t")
+
+x<-"${readArray_makeDb_fail[0]}"
+
+lines <- c(
+    paste("START>", "After IgBLAST+makedb"),
+    paste("PASS>", nrow(makeDb_pass)),
+    paste("FAIL>", nrow(makeDb_fail)),
+    paste("END>", "After IgBLAST+makedb"),
+    "",
+    paste("START>", "after DUPCOUNT filter"),
+    paste("PASS>", nrow(collapse_pass)),
+    paste("FAIL>", nrow(collapse_fail)),
+    paste("END>", "after DUPCOUNT filter"),
+    ""
+  )
+
+
+file_path <- paste(chartr(".", "1", x),"output.txt", sep="-")
+
+cat(lines, sep = "\n", file = file_path, append = TRUE)
+"""
+
+}
+
+
+process maccac_pipeline_statistics {
+
+publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*csv$/) "pipeline_statistics/$filename"}
+input:
+ set val(name), file(first_igblast) from g0_27_logFile0_g_63
+ set val(name1), file(third_igblast) from g21_27_logFile0_g_63
+ set val(name2), file(clone) from g14_9_logFile2_g_63
+
+output:
+ file "*csv"  into g_63_outputFileCSV00
+
+
+script:
+
+readArray_first_igblast = first_igblast.toString().split(' ')
+readArray_third_igblast = third_igblast.toString().split(' ')
+readArray_clone = clone.toString().split(' ')
+
+"""
+#!/usr/bin/env Rscript 
+
+x1<-"${readArray_first_igblast[0]}"
+x2<-"${readArray_clone[0]}"
+x3<-"${readArray_third_igblast[0]}"
+
+file_names <- c(x1, x2, x3)
+output_file <- "output.txt"
+content <- sapply(file_names, function(file) {
+  readLines(file)
+}, simplify = "c")
+writeLines(content, con = output_file)
+
+library(prestor)
+
+console_log <- loadConsoleLog("output.txt")
+count_df <- plotConsoleLog(console_log, sizing="figure")
+
+write.csv(count_df,"pipeline statistics.csv") 
+
+"""
+}
+
+
+process Third_Alignment_mutation_report {
+
+input:
+ set val(name), file(makeDb_pass) from g21_12_outputFileTSV0_g21_38
+ set val(name1), file(makeDb_fail) from g21_12_outputFileTSV2_g21_38
+ set val(name2), file(collapse_pass) from g21_19_outputFileTSV0_g21_38
+ set val(name3), file(collapse_fail) from g21_19_outputFileTSV1_g21_38
+ set val(name2), file(v_ref) from g_2_germlineFastaFile_g21_38
+
+output:
+ file "*.rmd"  into g21_38_rMarkdown0_g21_39
+
+shell:
+
+readArray_makeDb_pass = makeDb_pass.toString().split(' ')
+readArray_makeDb_fail = makeDb_fail.toString().split(' ')
+readArray_collapse_pass = collapse_pass.toString().split(' ')
+readArray_collapse_fail = collapse_fail.toString().split(' ')
+readArray_v_ref = v_ref.toString().split(' ')
+
+'''
+#!/usr/bin/env perl
+
+
+my $script = <<'EOF';
+
+
+```{r echo=FALSE,message = FALSE}
 library(ggplot2)
 library(rlang)
 library(alakazam)
 library(dplyr)
 library(Biostrings)
 
-makeDb_pass<-read.csv("${readArray_makeDb_pass[0]}", sep="\t")
-makeDb_fail<-read.csv("${readArray_makeDb_fail[0]}", sep="\t")
-collapse_pass<-read.csv("${readArray_collapse_pass[0]}", sep="\t")
-collapse_fail<-read.csv("${readArray_collapse_fail[0]}", sep="\t")
-v_ref<-readDNAStringSet("${readArray_v_ref[0]}")
+collapse_pass<-read.csv("/home/bcrlab/veredk/M24/RJs14_collapse_filter2/RJs14_fIgsSbRb9_db-pass_collapsed-passed.tsv", sep="\t")
+collapse_fail<-read.csv("/home/bcrlab/veredk/M24/RJs14_collapse_filter2/RJs14_fIgsSbRb9_db-pass_collapsed-failed_conscount.tsv", sep="\t")
+v_ref<-readDNAStringSet("/home/bcrlab/veredk/M24/IGH/V_gapped.fasta")
 v_ref<-as.character(v_ref)
-
 
 threshold_column <- if("consensus_count" %in% names(collapse_fail)) "consensus_count" else "duplicate_count"
 
@@ -3051,81 +3604,9 @@ threshold_collapse <- max(collapse_fail[[threshold_column]])
 
 collapse_db <- rbind(collapse_pass, collapse_fail)
 
+```
 
-
-
-# number of pass reads in each step
-
-my_vector<-c(nrow(makeDb_pass),nrow(makeDb_fail),nrow(collapse_pass),nrow(collapse_fail))
-my_matrix <- matrix(my_vector, nrow = 2, byrow = TRUE)
-my_dataframe <- data.frame(row.names = c("MakeDb", "collaps"), my_matrix)
-colnames(my_dataframe) <- c("PASS", "FAIL")
-print(my_dataframe)
-write.csv(my_dataframe, "my_data.csv")
-
-## plot duplicated column
-
-file <- "duplication_count_after_collapse.pdf"
-
-p1 <- ggplot(collapse_db, aes(!!sym(threshold_column))) +
-geom_histogram(bins = 100) +
-geom_vline(xintercept=threshold_collapse, linetype="dotted", col = "red")
-
-ggsave(file, p1, height = 10, width = 12)
-
-## number of multiple assignment per gene (IMGT / ASC)
-
-collapse_db[["v_gene"]] <- getGene(collapse_db[["v_call"]], first = F, collapse = TRUE, strip_d = FALSE)
-
-plot1 <- collapse_db %>% filter(!grepl(",", v_gene)) %>% group_by(v_gene) %>%
-			summarise(n_read = n(), multiple = sum(grepl(",", v_call)), single = n_read - multiple,
-					p_multiple = multiple/n_read*100, p_single = single/n_read*100) %>%
-			select(v_gene, p_single, p_multiple) %>%
-			reshape2::melt() %>%
-			ggplot(mapping = aes(v_gene, value, fill = variable)) +
-			geom_col() +
-			theme_bw() +
-			theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 0.5))
-
-ggsave("multiple_assingment_precentage_by_gene.pdf", plot1, height = 10, width = 12)
-
-plot2 <- collapse_db %>% filter(!grepl(",", v_gene)) %>% 
-			mutate(collapse_status = !!sym(threshold_column)>= threshold_collapse) %>% 
-			group_by(collapse_status, v_gene) %>%
-			summarise(n_read = n(), multiple = sum(grepl(",", v_call)), single = n_read - multiple,
-					p_multiple = multiple/n_read*100, p_single = single/n_read*100) %>%
-			select(collapse_status, v_gene, p_single, p_multiple) %>%
-			reshape2::melt(id.vars = c("v_gene", "collapse_status")) %>%
-			ggplot(mapping = aes(v_gene, value, fill = variable)) +
-			geom_col() +
-			theme_bw() +
-			theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 0.5)) +
-			facet_grid(.~collapse_status)
-
-ggsave("multiple_assingment_precentage_by_gene_and_collapse_pass.pdf", plot2, height = 10, width = 12)
-
-### Check the number of alleles, and the amount for each gene. (IMGT / ASC)
-
-plot3 <- collapse_db %>%
-  filter(!!sym(threshold_column) >= threshold_collapse, !grepl(",", v_call)) %>%
-  group_by(v_gene) %>%
-  mutate(n_read = n()) %>%
-  group_by(v_gene, v_call) %>%
-  summarise(n_calls = n(), p_calls = n_calls / n_read * 100) %>%
-  arrange(v_gene, desc(p_calls)) %>%
-  ggplot(aes(x = reorder(v_call, p_calls), y = p_calls)) + # Modified aes() function
-  geom_col() + 
-  theme_bw() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 0.5)) +
-  facet_wrap(.~v_gene, ncol = 4, scales = "free_x")
-
-ggsave("allele_precentage_by_gene.pdf", plot3, height = 40, width = 25)
-
-
-#### heatmap
-
-entropy <- function(p) colSums(-(p * log(p)), na.rm = TRUE)
-
+```{r echo=FALSE,message = FALSE,fig.width=15,fig.height=10}
 library(reshape2)
 
 filtered_data <- collapse_db %>% filter(!!sym(threshold_column)>= threshold_collapse, !grepl(",", v_call))
@@ -3137,12 +3618,13 @@ process_v_call <- function(v_call_value) {
 
   seq_list <- filtered_data[filtered_data[,"v_call"] == v_call_value,][,"sequence_alignment"]
   ref_seq <- v_ref[v_call_value]
-  
   comparison_matrix <- matrix(0, nrow = length(seq_list), ncol = nchar(ref_seq))
   for (i in 1:length(seq_list)) {
     cut_seq <- substr(seq_list[[i]], 1, nchar(ref_seq))
     for (j in 1:nchar(ref_seq)) {
-      if (substr(ref_seq, j, j) == substr(cut_seq, j, j)) {
+      if(substr(cut_seq, j, j) == "."){
+      	comparison_matrix[i, j] <- 2
+      }else if (substr(ref_seq, j, j) == substr(cut_seq, j, j)) {
         comparison_matrix[i, j] <- 0
       } else {
         comparison_matrix[i, j] <- 1
@@ -3152,6 +3634,7 @@ process_v_call <- function(v_call_value) {
   
   proportion_of_ones <- colMeans(comparison_matrix == 1)
   entropy_vector <- proportion_of_ones * log2(proportion_of_ones / length(dim(comparison_matrix)[1])) * -1
+  entropy_vector[is.nan(entropy_vector)] <- 0
   max_index <- which.max(entropy_vector)
   max_value <- entropy_vector[max_index]
   data <- data.frame(position = seq_along(entropy_vector), value = entropy_vector)
@@ -3162,16 +3645,19 @@ process_v_call <- function(v_call_value) {
   labs(x = "Position",y = "entropy")+
   theme_minimal()+
   scale_x_continuous(breaks = seq(0, nchar(ref_seq), by = 10), labels = seq(0, nchar(ref_seq), by = 10)) +
-  scale_y_continuous(breaks = seq(0, max_value, by = 1), labels = seq(0,max_value, by = 1))
+  scale_y_continuous(breaks = seq(0, max_value, by = 0.1), labels = seq(0,max_value, by = 0.1))
 
 
   data_melt <- melt(comparison_matrix)
 
-  data_melt[,"color"] <- ifelse(data_melt[,"value"] == 0, "white", "blue")
+  data_melt[,"color"] <- ifelse(data_melt[,"value"] == 0, "white", 
+                              ifelse(data_melt[,"value"] == 1, "blue", "red"))
+
+  #data_melt[,"color"] <- ifelse(data_melt[,"value"] == 0, "white", "blue")
 
   heatmap_plot <- ggplot(data_melt, aes(x = Var2, y = Var1, fill = factor(value))) +
     geom_tile() +
-    scale_fill_manual(values = c("white", "blue")) +
+    scale_fill_manual(values =  c("white", "blue","red")) +
     labs(x = "Position", y = "Sequence") +
     theme_minimal() +
     theme(legend.position = "none") +  
@@ -3189,70 +3675,292 @@ process_v_call <- function(v_call_value) {
     scale_y_continuous(breaks = seq(0, length(seq_list), by = 10), labels = seq(0, length(seq_list), by = 10))
 
   library(gridExtra)
-  combined_plot <- grid.arrange(histogram_plot, heatmap_plot,entropy_plot, heights = c(1, 4,2))
-  ggsave(paste0("combined_plot_", chartr("*", "_", v_call_value), ".pdf"), plot = combined_plot, width = 10, height = 8)
+  combined_plot <- grid.arrange(histogram_plot, heatmap_plot,entropy_plot, heights = c(3,5,2))
+  invisible(combined_plot)
 }
 
 
 
 for (v_call_value in unique_v_calls) {
+  cat(v_call_value)
   process_v_call(v_call_value)
 }
 
+```
 
-"""
+EOF
+	
+open OUT, ">!{name}.rmd";
+print OUT $script;
+close OUT;
+
+'''
 
 }
 
 
-process Third_Alignment_count_aligmant_pass_fail {
+process Third_Alignment_render_mutation_report {
 
 input:
- set val(name), file(makeDb_pass) from g21_12_outputFileTSV0_g21_27
- set val(name1), file(makeDb_fail) from g21_12_outputFileTSV2_g21_27
- set val(name2), file(collapse_pass) from g21_19_outputFileTSV0_g21_27
- set val(name3), file(collapse_fail) from g21_19_outputFileTSV1_g21_27
+ file rmk from g21_38_rMarkdown0_g21_39
 
 output:
- file "*csv"  into g21_27_outFileTSV00
- file "*pdf"  into g21_27_outputFilePdf11
+ file "*.html"  into g21_39_outputFileHTML00
 
-script:
+"""
+
+#!/usr/bin/env Rscript 
+
+rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_dir=".")
+
+"""
+}
+
+
+process Third_Alignment_alignment_report {
+
+input:
+ set val(name), file(makeDb_pass) from g21_12_outputFileTSV0_g21_30
+ set val(name1), file(makeDb_fail) from g21_12_outputFileTSV2_g21_30
+ set val(name2), file(collapse_pass) from g21_19_outputFileTSV0_g21_30
+ set val(name3), file(collapse_fail) from g21_19_outputFileTSV1_g21_30
+ set val(name2), file(v_ref) from g_2_germlineFastaFile_g21_30
+
+output:
+ file "*.rmd"  into g21_30_rMarkdown0_g21_37
+
+shell:
 
 readArray_makeDb_pass = makeDb_pass.toString().split(' ')
 readArray_makeDb_fail = makeDb_fail.toString().split(' ')
 readArray_collapse_pass = collapse_pass.toString().split(' ')
 readArray_collapse_fail = collapse_fail.toString().split(' ')
+readArray_v_ref = v_ref.toString().split(' ')
+
+'''
+#!/usr/bin/env perl
+
+
+my $script = <<'EOF';
+
+
+```{r echo=FALSE,message = FALSE}
+library(ggplot2)
+library(rlang)
+library(alakazam)
+library(dplyr)
+library(Biostrings)
+
+makeDb_pass<-read.csv("/home/bcrlab/veredk/M24/RJs14_collapse_filter2/RJs14_fIgsSbRb9_db-pass.tsv", sep="\t")
+makeDb_fail<-read.csv("/home/bcrlab/veredk/M24/RJs14_collapse_filter2/RJs14_fIgsSbRb9_db-fail.tsv", sep="\t")
+collapse_pass<-read.csv("/home/bcrlab/veredk/M24/RJs14_collapse_filter2/RJs14_fIgsSbRb9_db-pass_collapsed-passed.tsv", sep="\t")
+collapse_fail<-read.csv("/home/bcrlab/veredk/M24/RJs14_collapse_filter2/RJs14_fIgsSbRb9_db-pass_collapsed-failed_conscount.tsv", sep="\t")
+
+
+threshold_column <- if("consensus_count" %in% names(collapse_fail)) "consensus_count" else "duplicate_count"
+
+threshold_collapse <- max(collapse_fail[[threshold_column]])
+
+
+collapse_db <- rbind(collapse_pass, collapse_fail)
+
+```
+
+
+### Plot duplicated column after collapse
+
+```{r echo=FALSE,message = FALSE,fig.width=30,fig.height=15}
+
+p1 <- ggplot(collapse_db, aes(!!sym(threshold_column))) +
+geom_histogram(bins = 100) +
+geom_vline(xintercept=threshold_collapse, linetype="dotted", col = "red")
+
+print(p1)
+
+```
+
+
+### Number of multiple assignment per gene (IMGT / ASC)
+
+```{r echo=FALSE,message = FALSE,fig.width=30,fig.height=15}
+
+collapse_db[["v_gene"]] <- getGene(collapse_db[["v_call"]], first = F, collapse = TRUE, strip_d = FALSE)
+
+plot1 <- collapse_db %>% filter(!grepl(",", v_gene)) %>% group_by(v_gene) %>%
+			summarise(n_read = n(), multiple = sum(grepl(",", v_call)), single = n_read - multiple,
+					p_multiple = multiple/n_read*100, p_single = single/n_read*100) %>%
+			select(v_gene, p_single, p_multiple) %>%
+			reshape2::melt() %>%
+			ggplot(mapping = aes(v_gene, value, fill = variable)) +
+			geom_col() +
+			theme_bw() +
+			theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 0.5))
+
+print(plot1)
+
+```
+
+
+### Number of multiple assignment per gene (IMGT / ASC) collapse pass
+
+```{r echo=FALSE,message = FALSE,fig.width=30,fig.height=15}
+
+plot2 <- collapse_db %>% filter(!grepl(",", v_gene)) %>% 
+			mutate(collapse_status = !!sym(threshold_column)>= threshold_collapse) %>% 
+			group_by(collapse_status, v_gene) %>%
+			summarise(n_read = n(), multiple = sum(grepl(",", v_call)), single = n_read - multiple,
+					p_multiple = multiple/n_read*100, p_single = single/n_read*100) %>%
+			select(collapse_status, v_gene, p_single, p_multiple) %>%
+			reshape2::melt(id.vars = c("v_gene", "collapse_status")) %>%
+			ggplot(mapping = aes(v_gene, value, fill = variable)) +
+			geom_col() +
+			theme_bw() +
+			theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 0.5)) +
+			facet_grid(.~collapse_status)
+
+print(plot2)
+
+```
+
+
+### Check the number of alleles, and the amount for each gene. (IMGT / ASC)
+
+```{r echo=FALSE,message = FALSE,fig.width=35,fig.height=50}
+plot3 <- collapse_db %>%
+  filter(!!sym(threshold_column) >= threshold_collapse, !grepl(",", v_call)) %>%
+  group_by(v_gene) %>%
+  mutate(n_read = n()) %>%
+  group_by(v_gene, v_call) %>%
+  summarise(n_calls = n(), p_calls = n_calls / n_read * 100) %>%
+  arrange(v_gene, desc(p_calls)) %>%
+  ggplot(aes(x = reorder(v_call, p_calls), y = p_calls)) + # Modified aes() function
+  geom_col() + 
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 0.5)) +
+  facet_wrap(.~v_gene, ncol = 4, scales = "free_x")
+
+print(plot3)
+
+```
+
+
+EOF
+	
+open OUT, ">!{name}.rmd";
+print OUT $script;
+close OUT;
+
+'''
+
+}
+
+
+process Third_Alignment_render_alignment_report {
+
+input:
+ file rmk from g21_30_rMarkdown0_g21_37
+
+output:
+ file "*.html"  into g21_37_outputFileHTML00
+
+"""
+
+#!/usr/bin/env Rscript 
+
+rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_dir=".")
+
+"""
+}
+
+
+process Third_Alignment_tables_postion {
+
+publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*tsv$/) "third_alignment_tables_position/$filename"}
+input:
+ set val(name), file(collapse_pass) from g21_19_outputFileTSV0_g21_33
+ set val(name1), file(collapse_fail) from g21_19_outputFileTSV1_g21_33
+
+output:
+ file "*tsv"  into g21_33_outFileTSV00
+
+script:
+
+
+readArray_collapse_pass = collapse_pass.toString().split(' ')
+readArray_collapse_fail = collapse_fail.toString().split(' ')
 """
 #!/usr/bin/env Rscript 
 
-makeDb_pass<-read.csv("${readArray_makeDb_pass[0]}", sep="\t")
-makeDb_fail<-read.csv("${readArray_makeDb_fail[0]}", sep="\t")
-collapse_pass<-read.csv("${readArray_collapse_pass[0]}", sep="\t")
-collapse_fail<-read.csv("${readArray_collapse_fail[0]}", sep="\t")
-
-my_vector<-c(nrow(makeDb_pass),nrow(makeDb_fail),nrow(collapse_pass),nrow(collapse_fail))
-
-my_matrix <- matrix(my_vector, nrow = 2, byrow = TRUE)
-my_dataframe <- data.frame(row.names = c("MakeDb", "collaps"), my_matrix)
-colnames(my_dataframe) <- c("PASS", "FAIL")
-print(my_dataframe)
-write.csv(my_dataframe, "my_data.csv")
-
-## plot duplicated column
-
-file <- "duplication_count_after_collapse.pdf"
-
+install.packages("vegan")
+library(seqinr)
+library(vegan)
+library(dplyr)
 library(ggplot2)
+library(alakazam)
 
-p1 <- ggplot(collapse_pass, aes(duplicate_count)) +
-geom_histogram(bins = 100)
-p2 <- ggplot(collapse_fail, aes(duplicate_count)) +
-geom_histogram(bins = 100)
+collapse_pass<-read.delim("${readArray_collapse_pass[0]}", sep="\t")
+collapse_fail<-read.delim("${readArray_collapse_fail[0]}", sep="\t")
 
-p3 <- cowplot::plot_grid(p1,p2,nrow = 2)
+datadf <- rbind(collapse_pass, collapse_fail)
+datadf[,"v_gene"] <- getGene(datadf[,"v_call"])
 
-ggsave(file, p3, height = 10, width = 12)
+positionInfo <- function(data, v_gene, verbose=TRUE){
+    info <- list()
+    if(verbose){cat(paste0("Analyzing positions for V gene: ",v_gene,"\n"))}
+    for (i in 1:(nchar(as.character(data[1,"sequence_alignment"])))){
+        ss <- substr(data[,"sequence_alignment"],i,i)
+        ss <- toupper(ss)
+        df <- data.frame(base=unique(ss))
+        tmp <- c()
+        for ( j in 1:length(unique(ss))){
+            tmp[j] <- length(grep(df[j,1], ss))
+        }
+        df[,"rep"] <- tmp
+        rownames(df) <- as.character(df[,1])
+        df[,1] <- NULL
+        dff <- subset(df, rownames(df)!="-")
+        
+        info[[i]] <- list(
+            shan = vegan::diversity(t(df)),                                    # Shannon entropy of position
+            shanc = ifelse(nrow(dff)==0, NA, vegan::diversity(t(dff))),        # Shannon entropy of position removing gaps ("-")
+            rich = length(unique(ss)),                                  # Position richness
+            richc = ifelse(nrow(dff)==0, NA, length(rownames(dff))),    # Position richness removing gaps ("-")
+            uniq = paste(unique(ss), collapse = "|"),                                    # Unique bases in position
+            repe = paste(tmp, collapse = "|")                                           # Repetitions of the unique bases in position
+        )
+
+        print(unique(ss))
+        if(verbose){
+            if((i %% (round(nchar(as.character(data[1,"sequence_alignment"]))*0.1,0))) == 0){message("  ", round(i/nchar(as.character(data[1,"sequence_alignment"]))*100, 0), "%")}
+        }
+    }
+
+    if(verbose){cat("Creating the data frame with the information \n")}
+
+    df <- data.frame(v_gene = v_gene,
+                     posi=c(1:length(info)),
+                     shan=sapply(info, `[[`, "shan"),
+                     shanc=sapply(info, `[[`, "shanc"),
+                     rich=sapply(info, `[[`, "rich"),
+                     richc=sapply(info, `[[`, "richc"),
+                     uniq=sapply(info, `[[`, "uniq"),
+                     repe=sapply(info, `[[`, "repe"))
+    
+    if(verbose){cat("Finished \n")}
+    return(df)
+}
+
+replace_dots <- function(x) {
+  chartr(".", "-", x)
+}
+df <- data.frame(lapply(datadf, replace_dots))
+
+filtered_data <- df %>% filter(!grepl(",", v_call))
+
+info <- lapply(unique(filtered_data[,"v_call"]), function(g){
+ x <- positionInfo( filtered_data[filtered_data[,"v_call"] == g,],g)
+ write.table(x, paste0( chartr("*", "_", g) , "_positionInfo.tsv"), quote=FALSE, row.names=FALSE, sep="\t")
+})
 
 
 """
